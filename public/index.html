@@ -1,0 +1,2701 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://stirring-paletas-6071ca.netlify.app/ -->
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Damn - Digital Hub</title>
+    <link rel="Stylesheet" href="./Global.css" />
+    <script src="./Damn - Digital Hub_files/three.min.js"></script>
+    <script src="./Damn - Digital Hub_files/GLTFLoader.js"></script>
+    <script src="./Damn - Digital Hub_files/OBJLoader.js"></script>
+    <script src="./Damn - Digital Hub_files/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.16.3/dist/ort.min.js"></script>
+    <style id="chromane_style">
+      body.chromane_rec_nofollow_link_highlighting_enabled a[rel*="nofollow"] {
+        margin-right: 8px;
+        margin-left: 8px;
+        outline: 2px dotted black !important;
+        outline-offset: 2px !important;
+      }
+      body.chromane_rec_sponsored_link_highlighting_enabled
+        a[rel*="sponsored"] {
+        margin-right: 8px;
+        margin-left: 8px;
+        outline: 2px dotted black !important;
+        outline-color: black;
+        outline-offset: 2px !important;
+      }
+      body.chromane_rec_ugc_link_highlighting_enabled a[rel*="ugc"] {
+        margin-right: 8px;
+        margin-left: 8px;
+        outline: 2px dotted black !important;
+        outline-offset: 2px !important;
+      }
+    </style>
+  </head>
+  <body class="">
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="logo-text">Damn</div>
+            <div class="logo-subtitle">DIGITAL HUB</div>
+          </div>
+        </div>
+
+        <div class="search-container">
+          <svg
+            class="search-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" class="search-box" placeholder="Buscar fotos..." />
+        </div>
+
+        <nav class="nav-menu">
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item active"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9,22 9,12 15,12 15,22"></polyline>
+            </svg>
+            <span>Home</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="9" cy="9" r="2"></circle>
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+            </svg>
+            <span>Gallery</span>
+            <span class="badge">71,789</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+              ></path>
+            </svg>
+            <span>Swipe it</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+              ></path>
+            </svg>
+            <span>Albums</span>
+            <span class="badge">1390</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+              ></path>
+            </svg>
+            <span>Collections</span>
+            <span class="badge">373</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+            <span>Mistery Box</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+              ></path>
+            </svg>
+            <span>Official Market</span>
+          </a>
+
+          <div class="nav-section">Biblioteca</div>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon
+                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+              ></polygon>
+            </svg>
+            <span>Favoritos</span>
+            <span class="badge">0</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Mapa</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"
+              ></path>
+            </svg>
+            <span>Guardados recientemente</span>
+          </a>
+
+          <div class="nav-section">Colecciones</div>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Días</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Personas</span>
+          </a>
+          <a
+            href="https://stirring-paletas-6071ca.netlify.app/#"
+            class="nav-item"
+          >
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              ></path>
+            </svg>
+            <span>Recuerdos</span>
+          </a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="header">
+          <div class="header-left">
+            <button class="back-btn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+            </button>
+            <div class="header-title">
+              <h1>Leyenda del club</h1>
+              <div class="header-subtitle">Ene 2025 • Campo de Vallecas</div>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="action-btn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path>
+              </svg>
+            </button>
+            <button class="action-btn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+            </button>
+            <button class="action-btn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+            </button>
+            <button class="action-btn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16,6 12,2 8,6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </button>
+            <button class="action-btn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+            </button>
+            <button class="action-btn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="19" cy="12" r="1"></circle>
+                <circle cx="5" cy="12" r="1"></circle>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="photo-container">
+          <div class="photo-main">
+            <img
+              src="./Damn - Digital Hub_files/6878ff3a13feba0daf6b2b24.webp"
+              alt="Leyenda del Rayo Vallecano"
+              class="historic-photo"
+            />
+            <button class="photo-nav prev">‹</button>
+            <button class="photo-nav next">›</button>
+            <div class="photo-tags">
+              <span class="photo-tag">Isi Palazón</span>
+              <span class="photo-tag">Álvaro García</span>
+              <span class="photo-tag">Sergio Camello</span>
+              <span class="photo-tag">Rayo Vallecano</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-products">
+          <h2 class="custom-title">
+            Make it <span class="yours">yours.</span>
+          </h2>
+          <p class="custom-subtitle">
+            Transform your favorite Damn moments into premium products.<br />Crafted
+            with precision. Made to last.
+          </p>
+
+          <div class="products-section">
+            <div class="product-buttons">
+              <h3 class="section-title">Choose your product</h3>
+
+              <div class="product-item featured" data-product="Mug">
+                <div class="product-info">
+                  <h3>Mug</h3>
+                  <p>Premium ceramic</p>
+                </div>
+                <div class="product-price">€24.99</div>
+              </div>
+
+              <div class="product-item" data-product="Shirt">
+                <div class="product-info">
+                  <h3>T-Shirt</h3>
+                  <p>100% organic cotton</p>
+                </div>
+                <div class="product-price">€29.99</div>
+              </div>
+
+              <div class="product-item" data-product="Cap">
+                <div class="product-info">
+                  <h3>Cap</h3>
+                  <p>Adjustable fit</p>
+                </div>
+                <div class="product-price">€19.99</div>
+              </div>
+
+              <div class="product-item" data-product="Poster">
+                <div class="product-info">
+                  <h3>Poster</h3>
+                  <p>Museum quality</p>
+                </div>
+                <div class="product-price">€34.99</div>
+              </div>
+            </div>
+
+            <div class="preview-section" style="position: relative">
+              <h3 class="section-title" style="margin-bottom: 10px">Preview</h3>
+              <div class="preview-price" style="margin-bottom: 10px">
+                €24.99
+              </div>
+              <div
+                id="iframe_div"
+                style="
+                  width: 100%;
+                  height: 579px;
+                  z-index: 200;
+                  position: relative;
+                "
+              >
+                <iframe
+                  id="canvas"
+                  src="https://damn-3dproduct-mpb8.vercel.app/?model=Mug"
+                  width="100%"
+                  height="100%"
+                ></iframe>
+                <div
+                  class="loading-indicator"
+                  id="loading-indicator"
+                  style="display: none"
+                >
+                  <div class="loading-spinner"></div>
+                  <span id="loading-text">Loading model</span>
+                </div>
+                <div
+                  id="loading-indicator-image"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    background-color: #00000093;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: 20px;
+                    display: none;
+                    z-index: 1000;
+                  "
+                >
+                  <div class="loading-indicator" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                    <div style="text-align: center;">
+                      <div class="loading-spinner" style="margin: 0 auto 10px;"></div>
+                      <span style="color: white; font-weight: 600;">Removing Background...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="order-btn">Order now</button>
+
+              <div class="features">
+                <div class="feature-item">
+                  <div class="feature-dot green"></div>
+                  <span>Free shipping</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-dot blue"></div>
+                  <span>Quality guarantee</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-dot purple"></div>
+                  <span>Unique customization</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-dot orange"></div>
+                  <span>5-7 days delivery</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-options">
+              <h3 class="section-title">Customization</h3>
+              <div class="customization-buttons button-wrapper">
+                <button class="flex-1 active">Image</button>
+                <button class="flex-1">Text</button>
+              </div>
+
+              <div class="configurator-controls" style="min-height: 742px">
+                <div
+                  id="image-customization"
+                  style="display: block"
+                  data-type="image-customization"
+                >
+                  <div class="control-group">
+                    <label class="control-label">Upload Image</label>
+                    <div class="upload-area" id="upload-area">
+                      <div class="upload-icon">📁</div>
+                      <div class="upload-text">Click to upload image</div>
+                      <div class="upload-hint">JPG, PNG, WebP (max 5MB)</div>
+                      <input
+                        type="file"
+                        id="image-upload"
+                        accept="image/*"
+                        style="display: none"
+                      />
+                    </div>
+                    
+                    <!-- Canvas Preview Section -->
+                    <div id="canvas-preview-section" style="display: none; margin-top: 20px;">
+                      <label class="control-label">Preview & Position</label>
+                      <div style="position: relative; border: 2px solid #ddd; border-radius: 8px; background: #f8f9fa; margin: 10px 0;">
+                        <canvas id="image-preview-canvas" style="display: block; cursor: move; border-radius: 6px;"></canvas>
+                        <div id="canvas-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; border-radius: 6px;">
+                          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #666; font-size: 12px; background: rgba(255,255,255,0.8); padding: 4px 8px; border-radius: 4px;">
+                            Drag to position
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="control-group"
+                      style="width: 100%; margin-top: 12px"
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: row;
+                          justify-content: space-between;
+                          align-items: center;
+                        "
+                      >
+                        <label class="control-label" style="margin-top: 6px"
+                          >Image Layers</label
+                        >
+                        <button class="remove-bg-btn control-btn" onclick="removeBackground()">
+                          Remove Bg
+                        </button>
+                      </div>
+                      <div class="image_layers"></div>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label">Image Size</label>
+                    <input
+                      type="range"
+                      class="control-slider"
+                      id="size-slider"
+                      min="100"
+                      max="920"
+                      step="10"
+                      value="920"
+                    />
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #666;
+                      "
+                    >
+                      <span>Small</span>
+                      <span>Large</span>
+                    </div>
+                    <div style="text-align: center; font-size: 12px; color: #333; margin-top: 4px;">
+                      Value: <span id="size-value">920</span>
+                    </div>
+                  </div>
+
+                  <div
+                    class="control-group poster-specific"
+                    style="display: none"
+                  >
+                    <label class="control-label">Poster Frame Style</label>
+                    <div class="control-buttons">
+                      <button
+                        class="control-btn frame-btn active"
+                        data-frame="wood"
+                      >
+                        Wood
+                      </button>
+                      <button class="control-btn frame-btn" data-frame="metal">
+                        Metal
+                      </button>
+                      <button
+                        class="control-btn frame-btn"
+                        data-frame="minimal"
+                      >
+                        Minimal
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label">Image Position</label>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                      "
+                    >
+                      <input
+                        type="range"
+                        class="control-slider"
+                        id="x-position"
+                        min="12"
+                        max="806"
+                        step="0.1"
+                        value="0"
+                      />
+                      <input
+                        type="range"
+                        class="control-slider"
+                        id="y-position"
+                        min="-21"
+                        max="823"
+                        step="0.1"
+                        value="0"
+                      />
+                    </div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #666;
+                      "
+                    >
+                      <span>Left/Right</span>
+                      <span>Up/Down</span>
+                    </div>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        font-size: 12px;
+                        color: #333;
+                        margin-top: 4px;
+                        text-align: center;
+                      "
+                    >
+                      <div>X: <span id="x-position-value">0</span></div>
+                      <div>Y: <span id="y-position-value">0</span></div>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label">Image Rotation</label>
+                    <input
+                      type="range"
+                      class="control-slider"
+                      id="rotation-slider"
+                      min="0"
+                      max="720"
+                      step="1"
+                      value="0"
+                    />
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #666;
+                      "
+                    >
+                      <span>0°</span>
+                      <span>360°</span>
+                    </div>
+                    <div style="text-align: center; font-size: 12px; color: #333; margin-top: 4px;">
+                      Angle: <span id="rotation-value">0</span>°
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="text-customization"
+                  style="display: none"
+                  data-type="text-customization"
+                >
+                  <div class="control-group">
+                    <label class="control-label">Add Text</label>
+                    <textarea
+                      id="add_text_inp"
+                      type="text"
+                      class=""
+                      style="
+                        width: 100%;
+                        min-height: 35px;
+                        border-radius: 10px;
+                        outline: none;
+                        border: 1px solid gray;
+                        padding-inline: 10px;
+                        resize: none;
+                        field-sizing: content;
+                        padding-block: 9px;
+                      "
+                    ></textarea>
+                    <button
+                      id="add_text"
+                      class="active"
+                      style="
+                        width: 100%;
+                        margin-top: 5px;
+                        height: 35px;
+                        background: black;
+                        color: white;
+                        border-radius: 10px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        cursor: pointer;
+                      "
+                    >
+                      Add Text
+                    </button>
+                  </div>
+                  <div class="control-group" style="width: 100%">
+                    <label class="control-label">Text Layers</label>
+                    <div class="text_layers"></div>
+                  </div>
+
+                  <div class="control-group" style="width: 100%">
+                    <label class="control-label">Text Color</label>
+                    <input
+                      type="text"
+                      data-coloris
+                      style="
+                        width: 85%;
+                        height: 25px;
+                        border-radius: 6px;
+                        border: #80808087 solid 1px;
+                        padding-inline: 10px;
+                      "
+                    />
+                  </div>
+                  <div class="control-group" style="width: 100%">
+                    <label class="control-label">Fonts</label>
+                    <div
+                      class="font-inp"
+                      style="
+                        width: 100%;
+                        height: 30px;
+                        border-radius: 10px;
+                        padding-inline: 10px;
+                        cursor: pointer;
+                      "
+                    >
+                      <div
+                        style="width: 100%; height: 100%; place-content: center"
+                      >
+                        <span class="selected-font">System UI</span>
+                      </div>
+                      <div class="custom-dialog">
+                        <ul></ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Text Size</label>
+                    <input
+                      type="range"
+                      class="control-slider"
+                      id="size-slider"
+                      min="1"
+                      max="6"
+                      step="0.25"
+                      value="2"
+                    />
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #666;
+                      "
+                    >
+                      <span>Small</span>
+                      <span>Large</span>
+                    </div>
+                    <div style="text-align: center; font-size: 12px; color: #333; margin-top: 4px;">
+                      Size: <span id="text-size-value">2</span>
+                    </div>
+                  </div>
+                  <div class="control-group" style="width: 100%">
+                    <label class="control-label" style="margin-bottom: -4px"
+                      >Line Height</label
+                    >
+                    <input
+                      type="range"
+                      class="control-slider"
+                      id="line-height-slider"
+                      min="0.1"
+                      max="4"
+                      step="0.15"
+                      value="2"
+                    />
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #666;
+                      "
+                    >
+                      <span>Small</span>
+                      <span>Large</span>
+                    </div>
+                    <div style="text-align: center; font-size: 12px; color: #333; margin-top: 4px;">
+                      Height: <span id="line-height-value">2</span>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label">Text Position</label>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                      "
+                    >
+                      <input
+                        type="range"
+                        class="control-slider"
+                        id="x-position"
+                        min="12"
+                        max="685"
+                        step="5"
+                        value="0"
+                      />
+                      <input
+                        type="range"
+                        class="control-slider"
+                        id="y-position"
+                        min="-21"
+                        max="744"
+                        step="5"
+                        value="0"
+                      />
+                    </div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #666;
+                      "
+                    >
+                      <span>Left/Right</span>
+                      <span>Up/Down</span>
+                    </div>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        font-size: 12px;
+                        color: #333;
+                        margin-top: 4px;
+                        text-align: center;
+                      "
+                    >
+                      <div>X: <span id="text-x-position-value">0</span></div>
+                      <div>Y: <span id="text-y-position-value">0</span></div>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label">Text Rotation</label>
+                    <input
+                      type="range"
+                      class="control-slider"
+                      id="rotation-slider"
+                      min="0"
+                      max="720"
+                      step="1"
+                      value="0"
+                    />
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        color: #666;
+                      "
+                    >
+                      <span>0°</span>
+                      <span>360°</span>
+                    </div>
+                    <div style="text-align: center; font-size: 12px; color: #333; margin-top: 4px;">
+                      Angle: <span id="text-rotation-value">0</span>°
+                    </div>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Product Color</label>
+                  <div id="picker" style="position: relative">
+                    <div
+                      style="
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 119px;
+                        padding-left: 10px;
+                      "
+                    >
+                      <input
+                        type="text"
+                        value="#ffffff"
+                        id="model-color-inp"
+                        style="
+                          width: 100%;
+                          background-color: #ece6e6;
+                          border: 1px solid #666;
+                          border-radius: 10px;
+                          height: 25px;
+                          padding-inline: 8px;
+                          margin-bottom: 10px;
+                        "
+                      />
+                      <div
+                        id="color-dor-parent"
+                        style="
+                          display: flex;
+                          flex-direction: row;
+                          flex-wrap: wrap;
+                        "
+                      >
+                        <div data-color="#ff6b6b" class="color-dot red"></div>
+                        <div data-color="#6bcb77" class="color-dot green"></div>
+                        <div data-color="#4d96ff" class="color-dot blue"></div>
+                        <div
+                          data-color="#ffd93d"
+                          class="color-dot yellow"
+                        ></div>
+                        <div
+                          data-color="#6a4c93"
+                          class="color-dot purple"
+                        ></div>
+                        <div
+                          data-color="#ff9f1c"
+                          class="color-dot orange"
+                        ></div>
+                        <div data-color="#00b8a9" class="color-dot teal"></div>
+                        <div data-color="#ff5c8a" class="color-dot pink"></div>
+                        <div data-color="#a0a0a0" class="color-dot gray"></div>
+                        <div data-color="#222222" class="color-dot black"></div>
+                        <div
+                          data-color="#1abc9c"
+                          class="color-dot turquoise"
+                        ></div>
+                        <div
+                          data-color="#3498db"
+                          class="color-dot skyblue"
+                        ></div>
+                        <div
+                          data-color="#9b59b6"
+                          class="color-dot violet"
+                        ></div>
+                        <div
+                          data-color="#e74c3c"
+                          class="color-dot crimson"
+                        ></div>
+                        <div data-color="#34495e" class="color-dot navy"></div>
+                        <div data-color="#f39c12" class="color-dot amber"></div>
+                        <div
+                          data-color="#27ae60"
+                          class="color-dot emerald"
+                        ></div>
+                        <div data-color="#8e44ad" class="color-dot plum"></div>
+                        <div
+                          data-color="#2c3e50"
+                          class="color-dot charcoal"
+                        ></div>
+                        <div
+                          data-color="#ecf0f1"
+                          class="color-dot lightgray"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    id="texture-notice"
+                    style="
+                      display: none;
+                      font-size: 12px;
+                      color: #d32f2f;
+                      margin-top: 8px;
+                      font-weight: 500;
+                    "
+                  >
+                    ⚠️ Image applied - color changes will affect non-image parts
+                    only
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Model Rotation</label>
+                  <div class="control-buttons">
+                    <button
+                      class="control-btn active"
+                      id="auto-rotate-btn"
+                      style="width: 100%"
+                    >
+                      Stop Rotate
+                    </button>
+                    <button
+                      class="control-btn"
+                      id="reset-view-btn"
+                      style="width: 100%"
+                    >
+                      Reset View
+                    </button>
+                  </div>
+                  <button
+                    class="control-btn"
+                    id="export-view-btn"
+                    style="width: 100%; margin-top: 10px"
+                  >
+                    Export
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-photos">
+          <h2 class="related-title">Fotos relacionadas</h2>
+          <div class="photo-grid">
+            <div class="photo-card">
+              <div class="photo-placeholder">Hugo Duro - Goleador</div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-placeholder">Equipo Histórico</div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-placeholder">Celebración Vallecas</div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-placeholder">Afición Rayista</div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-placeholder">Exposición Centenario</div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-placeholder">Gol Histórico</div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-placeholder">Cantera Rayo</div>
+            </div>
+            <div class="photo-card">
+              <div class="photo-placeholder">Trofeo Primera</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Global utility functions
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      function throttle(func, limit) {
+        let inThrottle;
+        return function () {
+          const args = arguments;
+          const context = this;
+          if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
+          }
+        };
+      }
+
+      // Simple logging function
+      function log(message, type = "info") {
+        console.log(`[${type.toUpperCase()}] ${message}`);
+      }
+
+      // Global systems
+      let notifications = {
+        showing: false,
+        show: function (message, type = "info") {
+          // Create notification element
+          this.showing = true;
+          const notification = document.createElement("div");
+          notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 10000;
+                    max-width: 300px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                `;
+
+          // Set background color based on type
+          switch (type) {
+            case "success":
+              notification.style.background = "#34c759";
+              break;
+            case "error":
+              notification.style.background = "#ff3b30";
+              break;
+            case "warning":
+              notification.style.background = "#ff9500";
+              break;
+            default:
+              notification.style.background = "#007aff";
+          }
+
+          notification.textContent = message;
+          document.body.appendChild(notification);
+
+          // Animate in
+          setTimeout(() => {
+            notification.style.transform = "translateX(0)";
+          }, 100);
+
+          // Auto remove after 3 seconds
+          setTimeout(() => {
+            notification.style.transform = "translateX(100%)";
+            setTimeout(() => {
+              if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+                this.showing = false;
+              }
+            }, 300);
+          }, 3000);
+        },
+      };
+
+      // Global state variables
+      let uploadedImage = null;
+      let currentModel = null;
+      let targetMaterial = null;
+      let currentProduct = "poster";
+      let originalMaterials = new Map();
+      let posterCanvasMesh = null;
+      let posterFrameMesh = null;
+
+      // MODNet Background Removal
+      let modnetSession = null;
+      let isModnetInitialized = false;
+
+      // Simple debug logging
+      function debugLog(message, type = "info") {
+        console.log(`[${type.toUpperCase()}] ${message}`);
+      }
+
+      // Initialize MODNet ONNX model
+      async function initializeMODNet() {
+        if (typeof ort === 'undefined') {
+          console.error('ONNX Runtime not available');
+          return false;
+        }
+
+        const modelUrls = [
+          './modnet_webcam_human_seg.onnx', // Local file
+          'https://huggingface.co/Xenova/modnet/resolve/main/onnx/model.onnx', // Fallback 1
+          'https://huggingface.co/Xenova/modnet/resolve/main/onnx/model_quantized.onnx' // Fallback 2
+        ];
+
+        for (let i = 0; i < modelUrls.length; i++) {
+          const modelUrl = modelUrls[i];
+          const isLocal = !modelUrl.startsWith('http');
+          
+          try {
+            // Set ONNX Runtime execution providers and options
+            ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.16.3/dist/';
+            ort.env.wasm.numThreads = 1;
+            
+            notifications.show(`Loading MODNet model (attempt ${i + 1})...`, 'info');
+            log(`Attempting to load MODNet from: ${modelUrl}`, 'info');
+            
+            // Check file availability first
+            const response = await fetch(modelUrl, { method: 'HEAD' });
+            if (!response.ok) {
+              throw new Error(`Model not accessible (${response.status})`);
+            }
+            
+            const contentLength = response.headers.get('content-length');
+            log(`Model file size: ${contentLength} bytes`, 'info');
+            
+            if (isLocal && (!contentLength || parseInt(contentLength) < 100000)) {
+              throw new Error('Local model file appears corrupted or too small');
+            }
+            
+            // Try different session configurations based on attempt
+            const sessionConfigs = [
+              {
+                executionProviders: ['wasm'],
+                graphOptimizationLevel: 'disabled',
+                enableCpuMemArena: false,
+                enableMemPattern: false,
+                executionMode: 'sequential'
+              },
+              {
+                executionProviders: ['wasm'],
+                graphOptimizationLevel: 'basic'
+              },
+              {
+                executionProviders: ['wasm']
+              }
+            ];
+            
+            const config = sessionConfigs[Math.min(i, sessionConfigs.length - 1)];
+            log(`Using session config: ${JSON.stringify(config)}`, 'info');
+            
+            modnetSession = await ort.InferenceSession.create(modelUrl, config);
+            
+            isModnetInitialized = true;
+            log('MODNet model loaded successfully', 'success');
+            notifications.show('MODNet background removal ready!', 'success');
+            return true;
+            
+          } catch (error) {
+            console.error(`Failed to load MODNet from ${modelUrl}:`, error);
+            log(`MODNet load attempt ${i + 1} failed: ${error.message}`, 'error');
+            
+            // Continue to next URL if this one failed
+            if (i < modelUrls.length - 1) {
+              log(`Trying next MODNet model source...`, 'info');
+              continue;
+            }
+          }
+        }
+        
+        // All attempts failed
+        console.error('All MODNet initialization attempts failed');
+        log('All MODNet model sources failed to load', 'error');
+        notifications.show('Background removal unavailable - model loading failed', 'warning');
+        return false;
+      }
+
+      // Preprocess image for MODNet
+      function preprocessImageForMODNet(imageElement) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // MODNet webcam model expects 512x512 input
+        canvas.width = 512;
+        canvas.height = 512;
+        
+        // Draw and resize image
+        ctx.drawImage(imageElement, 0, 0, 512, 512);
+        
+        // Get image data and normalize to [0, 1]
+        const imageData = ctx.getImageData(0, 0, 512, 512);
+        const { data } = imageData;
+        
+        // Convert to RGB float32 tensor [1, 3, 512, 512]
+        const inputTensor = new Float32Array(1 * 3 * 512 * 512);
+        
+        // Normalize and convert RGBA to RGB (0-1 range for webcam model)
+        for (let i = 0; i < 512 * 512; i++) {
+          const r = data[i * 4] / 255.0;     // Normalize to [0, 1]
+          const g = data[i * 4 + 1] / 255.0;
+          const b = data[i * 4 + 2] / 255.0;
+          
+          // Channel-first format: [R_channel, G_channel, B_channel]
+          inputTensor[i] = r;                    // R channel
+          inputTensor[512 * 512 + i] = g;        // G channel
+          inputTensor[512 * 512 * 2 + i] = b;    // B channel
+        }
+        
+        return new ort.Tensor('float32', inputTensor, [1, 3, 512, 512]);
+      }
+
+      // Apply MODNet mask to original image
+      function applyMODNetMask(originalImage, mask, originalWidth, originalHeight) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = originalWidth;
+        canvas.height = originalHeight;
+        
+        // Draw original image
+        ctx.drawImage(originalImage, 0, 0, originalWidth, originalHeight);
+        
+        // Get image data
+        const imageData = ctx.getImageData(0, 0, originalWidth, originalHeight);
+        const data = imageData.data;
+        
+        // Resize mask to match original image dimensions
+        const maskCanvas = document.createElement('canvas');
+        const maskCtx = maskCanvas.getContext('2d');
+        maskCanvas.width = originalWidth;
+        maskCanvas.height = originalHeight;
+        
+        // Create ImageData from mask tensor
+        const maskImageData = new ImageData(512, 512);
+        for (let i = 0; i < 512 * 512; i++) {
+          const alpha = Math.max(0, Math.min(255, mask[i] * 255));
+          maskImageData.data[i * 4] = alpha;     // R
+          maskImageData.data[i * 4 + 1] = alpha; // G
+          maskImageData.data[i * 4 + 2] = alpha; // B
+          maskImageData.data[i * 4 + 3] = 255;   // A
+        }
+        
+        // Draw mask to temporary canvas
+        const tempCanvas = document.createElement('canvas');
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCanvas.width = 512;
+        tempCanvas.height = 512;
+        tempCtx.putImageData(maskImageData, 0, 0);
+        
+        // Resize mask to original dimensions
+        maskCtx.drawImage(tempCanvas, 0, 0, 512, 512, 0, 0, originalWidth, originalHeight);
+        const resizedMaskData = maskCtx.getImageData(0, 0, originalWidth, originalHeight);
+        
+        // Apply mask
+        for (let i = 0; i < data.length; i += 4) {
+          const maskAlpha = resizedMaskData.data[i]; // Use red channel as alpha
+          data[i + 3] = maskAlpha; // Set alpha channel
+        }
+        
+        // Draw final result
+        ctx.putImageData(imageData, 0, 0);
+        
+        return canvas.toDataURL('image/png');
+      }
+
+      // Remove background using MODNet
+      async function removeBackground() {
+        if (!uploadedImage) {
+          notifications.show('Please upload an image first', 'warning');
+          return;
+        }
+
+        if (!isModnetInitialized) {
+          notifications.show('Initializing MODNet...', 'info');
+          const initialized = await initializeMODNet();
+          if (!initialized) {
+            notifications.show('Background removal unavailable. Try using an image editing tool to remove the background manually.', 'error');
+            return;
+          }
+        }
+
+        // Show loading indicator
+        const loadingIndicator = document.getElementById('loading-indicator-image');
+        if (loadingIndicator) {
+          loadingIndicator.style.display = 'block';
+        }
+
+        notifications.show('Removing background with MODNet...', 'info');
+        log('Starting MODNet background removal', 'info');
+
+        try {
+          // Create image element
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          
+          img.onload = async function() {
+            try {
+              const originalWidth = img.width;
+              const originalHeight = img.height;
+              
+              // Preprocess image
+              const inputTensor = preprocessImageForMODNet(img);
+              
+              // Run inference (webcam model uses 'input' as input name)
+              const feeds = { 'input': inputTensor };
+              const results = await modnetSession.run(feeds);
+              
+              // Get output mask (webcam model outputs 'output')
+              const outputTensor = results.output;
+              const maskData = outputTensor.data;
+              
+              // Apply mask to original image
+              const resultImageUrl = applyMODNetMask(img, maskData, originalWidth, originalHeight);
+              
+              // Update the uploaded image
+              uploadedImage = resultImageUrl;
+              
+              // Update the preview image for canvas functionality
+              const processedImg = new Image();
+              processedImg.onload = function() {
+                previewImage = processedImg;
+                
+                // Show canvas preview with the processed image
+                const canvasPreviewSection = document.getElementById('canvas-preview-section');
+                if (canvasPreviewSection) {
+                  canvasPreviewSection.style.display = 'block';
+                  redrawCanvas(); // Redraw canvas with the new processed image
+                }
+              };
+              processedImg.src = resultImageUrl;
+              
+              // Send to iframe
+              if (window.postToIframe) {
+                postToIframe({
+                  type: "upload-image",
+                  payload: {
+                    image: resultImageUrl,
+                    id: crypto.randomUUID()
+                  }
+                });
+              }
+              
+              notifications.show('Background removed successfully with MODNet!', 'success');
+              log('MODNet background removal completed', 'success');
+              
+            } catch (error) {
+              console.error('Error during MODNet inference:', error);
+              notifications.show('Error during background removal', 'error');
+              log(`MODNet inference error: ${error.message}`, 'error');
+            } finally {
+              // Hide loading indicator
+              const loadingIndicator = document.getElementById('loading-indicator-image');
+              if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+              }
+            }
+          };
+          
+          img.onerror = function() {
+            notifications.show('Error loading image for background removal', 'error');
+            log('Failed to load image for MODNet processing', 'error');
+            // Hide loading indicator
+            const loadingIndicator = document.getElementById('loading-indicator-image');
+            if (loadingIndicator) {
+              loadingIndicator.style.display = 'none';
+            }
+          };
+          
+          img.src = uploadedImage;
+          
+        } catch (error) {
+          console.error('Error in MODNet background removal:', error);
+          notifications.show('Error processing image with MODNet', 'error');
+          log(`MODNet processing error: ${error.message}`, 'error');
+          // Hide loading indicator
+          const loadingIndicator = document.getElementById('loading-indicator-image');
+          if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+          }
+        }
+      }
+
+      // Navigation functionality
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((nav) => nav.classList.remove("active"));
+          item.classList.add("active");
+
+          document.querySelector("#canvas").src = "";
+        });
+      });
+
+      // Photo navigation
+      let currentPhoto = 0;
+      const photoDescriptions = [
+        "Leyenda histórica del Rayo",
+        "Momento épico en Vallecas",
+        "Gloria rayista eterna",
+      ];
+
+      document
+        .querySelector(".photo-nav.prev")
+        .addEventListener("click", () => {
+          currentPhoto =
+            (currentPhoto - 1 + photoDescriptions.length) %
+            photoDescriptions.length;
+          console.log("Mostrando:", photoDescriptions[currentPhoto]);
+        });
+
+      document
+        .querySelector(".photo-nav.next")
+        .addEventListener("click", () => {
+          currentPhoto = (currentPhoto + 1) % photoDescriptions.length;
+          console.log("Mostrando:", photoDescriptions[currentPhoto]);
+        });
+
+      // Initialize 3D Scene
+      function init3DScene() {
+        const container = document.getElementById("3d-preview");
+
+        // Scene setup
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf8f9fa);
+
+        // Camera setup
+        camera = new THREE.PerspectiveCamera(
+          75,
+          container.clientWidth / container.clientHeight,
+          0.1,
+          1000
+        );
+        camera.position.set(0, 0, 5);
+
+        // Renderer setup
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        container.appendChild(renderer.domElement);
+
+        // Controls
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 5, 5);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+
+        // Enhanced animation loop with performance monitoring
+        function animate() {
+          requestAnimationFrame(animate);
+          controls.update();
+
+          // Auto rotate model if enabled
+          if (autoRotate && currentModel) {
+            currentModel.rotation.y += 0.01;
+          }
+
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        // Load default model
+        loadProductModel("poster");
+      }
+
+      // Enhanced model loading with better performance and error handling
+      function loadProductModel(productType) {
+        // Store the current uploaded image before clearing
+        const currentUploadedImage = uploadedImage;
+
+        // Dispose of existing model to prevent memory leaks
+        if (currentModel) {
+          currentModel.traverse((child) => {
+            if (child.isMesh) {
+              if (child.geometry) child.geometry.dispose();
+              if (child.material) {
+                if (Array.isArray(child.material)) {
+                  child.material.forEach((mat) => {
+                    if (mat.map) mat.map.dispose();
+                    mat.dispose();
+                  });
+                } else {
+                  if (child.material.map) child.material.map.dispose();
+                  child.material.dispose();
+                }
+              }
+            }
+          });
+          scene.remove(currentModel);
+          currentModel = null;
+        }
+
+        targetMaterial = null;
+        originalMaterials.clear();
+
+        currentProduct = productType;
+
+        // Model URLs with fallback validation
+        const modelUrls = {
+          mug: "./plain_mug2.glb",
+          tshirt: "./tshirt.glb",
+          cap: "./cap.glb",
+          poster: "./poster.glb",
+        };
+
+        if (modelUrls[productType]) {
+          console.log(`Loading ${productType}...`);
+          loadGLBModel(
+            modelUrls[productType],
+            productType,
+            currentUploadedImage
+          );
+        } else {
+          const errorMsg = `Model for ${productType} not found`;
+          debugLog(errorMsg, "error");
+          console.error(errorMsg);
+        }
+      }
+
+      // Load Model (GLB or OBJ)
+      function loadGLBModel(url, productType, preserveImage = null) {
+        const isOBJ = url.toLowerCase().endsWith(".obj");
+        const loader = isOBJ ? new THREE.OBJLoader() : new THREE.GLTFLoader();
+
+        debugLog(
+          `Starting to load ${productType} ${isOBJ ? "OBJ" : "GLB"} model...`,
+          "loading"
+        );
+
+        // Show loading indicator
+        const loadingIndicator = document.getElementById("loading-indicator");
+        const loadingText = document.getElementById("loading-text");
+        loadingText.textContent = `Loading ${productType}...`;
+        loadingIndicator.style.display = "flex";
+
+        loader.load(
+          url,
+          (result) => {
+            const model = isOBJ ? result : result.scene;
+
+            // --- 1. Enhanced Camera Framing for Poster ---
+            const box = new THREE.Box3().setFromObject(model);
+            const size = box.getSize(new THREE.Vector3());
+            const center = box.getCenter(new THREE.Vector3());
+
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+
+            // Special handling for poster - closer view
+            if (productType === "poster") {
+              cameraZ *= 1.2; // Closer view for poster
+              // Position camera slightly above and angled for better poster view
+              camera.position.set(
+                center.x + 0.5,
+                center.y + 0.3,
+                center.z + cameraZ
+              );
+            } else {
+              cameraZ *= 1.5; // Standard padding for other products
+              camera.position.set(center.x, center.y, center.z + cameraZ);
+            }
+
+            controls.target.copy(center);
+            controls.update();
+
+            // --- 2. Enhanced Material Processing for Poster ---
+            let largestMesh = null;
+            let maxArea = 0;
+            let allMaterials = [];
+            let posterFrame = null;
+            let posterCanvas = null;
+
+            model.traverse((child) => {
+              if (child.isMesh) {
+                const geometry = child.geometry;
+                if (geometry) {
+                  // Calculate mesh area more accurately
+                  const meshSize = new THREE.Box3()
+                    .setFromObject(child)
+                    .getSize(new THREE.Vector3());
+                  const area =
+                    meshSize.x * meshSize.y +
+                    meshSize.y * meshSize.z +
+                    meshSize.z * meshSize.x;
+
+                  // Special handling for poster - look for frame and canvas separately
+                  if (productType === "poster") {
+                    const meshName = child.name.toLowerCase();
+                    debugLog(`Found mesh: ${child.name} (${meshName})`, "info");
+
+                    // More comprehensive frame detection
+                    if (
+                      meshName.includes("frame") ||
+                      meshName.includes("border") ||
+                      meshName.includes("wood") ||
+                      meshName.includes("edge") ||
+                      meshName.includes("trim")
+                    ) {
+                      posterFrame = child;
+                      posterFrameMesh = child;
+                      debugLog(`Identified frame: ${child.name}`, "success");
+                    } else if (
+                      meshName.includes("canvas") ||
+                      meshName.includes("surface") ||
+                      meshName.includes("paper") ||
+                      meshName.includes("image") ||
+                      meshName.includes("texture") ||
+                      meshName.includes("plane") ||
+                      meshName.includes("area")
+                    ) {
+                      posterCanvas = child;
+                      posterCanvasMesh = child;
+                      debugLog(`Identified canvas: ${child.name}`, "success");
+                      if (area > maxArea) {
+                        maxArea = area;
+                        largestMesh = child;
+                      }
+                    } else {
+                      // For any other mesh, check if it might be the canvas
+                      // Look for meshes that are not the frame and have reasonable area
+                      if (
+                        !meshName.includes("frame") &&
+                        !meshName.includes("border") &&
+                        !meshName.includes("wood") &&
+                        !meshName.includes("edge") &&
+                        !meshName.includes("trim")
+                      ) {
+                        if (area > maxArea) {
+                          maxArea = area;
+                          largestMesh = child;
+                        }
+                      }
+                    }
+
+                    // Special handling for OBJ files - if no specific names found, use the largest mesh as canvas
+                    if (isOBJ && !posterCanvas && largestMesh) {
+                      posterCanvas = largestMesh;
+                      posterCanvasMesh = largestMesh;
+                      debugLog(
+                        `OBJ: Using largest mesh as canvas: ${largestMesh.name}`,
+                        "warning"
+                      );
+                    }
+                  } else {
+                    // Standard handling for other products
+                    if (area > maxArea) {
+                      maxArea = area;
+                      largestMesh = child;
+                    }
+                  }
+
+                  // Store all materials for processing
+                  if (child.material) {
+                    allMaterials.push({
+                      mesh: child,
+                      material: child.material,
+                      area: area,
+                      name: child.name,
+                    });
+                  }
+                }
+              }
+            });
+
+            // Enhanced material processing
+            allMaterials.forEach(({ mesh, material, name }) => {
+              // Store original material for reset
+              originalMaterials.set(mesh, material.clone());
+
+              // Special handling for different product types
+              if (productType === "poster") {
+                const meshName = name.toLowerCase();
+                if (meshName.includes("frame") || meshName.includes("border")) {
+                  // Keep frame material as is (wood, metal, etc.)
+                  debugLog(`Frame material preserved: ${name}`, "info");
+                } else {
+                  // Make canvas/surface white for texture application
+                  mesh.material = material.clone();
+                  mesh.material.color.set(0xffffff);
+                  mesh.material.needsUpdate = true;
+                }
+              } else if (productType === "tshirt") {
+                // For t-shirts, ensure all fabric materials are white
+                const meshName = name.toLowerCase();
+                if (
+                  meshName.includes("fabric") ||
+                  meshName.includes("cloth") ||
+                  meshName.includes("front") ||
+                  meshName.includes("back") ||
+                  meshName.includes("body")
+                ) {
+                  mesh.material = material.clone();
+                  mesh.material.color.set(0xffffff);
+                  mesh.material.needsUpdate = true;
+                  debugLog(
+                    `T-shirt fabric material set to white: ${name}`,
+                    "success"
+                  );
+                } else {
+                  // Keep non-fabric materials (like tags, seams) as they are
+                  debugLog(
+                    `T-shirt non-fabric material preserved: ${name}`,
+                    "info"
+                  );
+                }
+              } else {
+                // Standard white base for other products
+                mesh.material = material.clone();
+                mesh.material.color.set(0xffffff);
+                mesh.material.needsUpdate = true;
+              }
+            });
+
+            // Additional processing for OBJ files - ensure materials are properly initialized
+            if (isOBJ && productType === "poster") {
+              debugLog("Processing OBJ poster materials...", "info");
+              model.traverse((child) => {
+                if (child.isMesh) {
+                  // Ensure material exists and is properly configured
+                  if (!child.material) {
+                    child.material = new THREE.MeshStandardMaterial({
+                      color: 0xffffff,
+                    });
+                    debugLog(
+                      `Created material for OBJ mesh: ${child.name}`,
+                      "info"
+                    );
+                  } else {
+                    // Ensure material properties are set correctly
+                    child.material.color.set(0xffffff);
+                    child.material.needsUpdate = true;
+                    debugLog(
+                      `Updated material for OBJ mesh: ${child.name}`,
+                      "info"
+                    );
+                  }
+                }
+              });
+            }
+
+            // Additional processing for material arrays
+            model.traverse((child) => {
+              if (child.isMesh) {
+                if (Array.isArray(child.material)) {
+                  child.material = child.material.map((mat, index) => {
+                    if (mat) {
+                      originalMaterials.set(
+                        `${child.name}_${index}`,
+                        mat.clone()
+                      );
+                      if (
+                        productType === "poster" &&
+                        child.name.toLowerCase().includes("frame")
+                      ) {
+                        // Preserve frame materials
+                        debugLog(
+                          `Frame material array preserved: ${child.name}_${index}`,
+                          "info"
+                        );
+                        return mat.clone();
+                      } else {
+                        const newMat = mat.clone();
+                        newMat.color.set(0xffffff);
+                        newMat.needsUpdate = true;
+                        return newMat;
+                      }
+                    }
+                    return mat;
+                  });
+                } else if (child.material) {
+                  if (
+                    !allMaterials.some((m) => m.material === child.material)
+                  ) {
+                    originalMaterials.set(child, child.material.clone());
+                    if (
+                      productType === "poster" &&
+                      child.name.toLowerCase().includes("frame")
+                    ) {
+                      // Preserve frame materials
+                      debugLog(
+                        `Frame material preserved: ${child.name}`,
+                        "info"
+                      );
+                    } else {
+                      child.material = child.material.clone();
+                      child.material.color.set(0xffffff);
+                      child.material.needsUpdate = true;
+                    }
+                  }
+                }
+              }
+            });
+
+            // Set target material for texture application
+            if (productType === "poster") {
+              // For posters, prioritize the canvas material
+              if (posterCanvas && posterCanvas.material) {
+                targetMaterial = posterCanvas.material;
+                debugLog(
+                  `Poster canvas material identified: ${posterCanvas.name}`,
+                  "success"
+                );
+              } else if (largestMesh && largestMesh.material) {
+                targetMaterial = largestMesh.material;
+                debugLog(
+                  `Using largest mesh material for poster: ${largestMesh.name}`,
+                  "warning"
+                );
+              } else {
+                // Fallback: find any material that's not the frame
+                const nonFrameMaterial = allMaterials.find(({ name }) => {
+                  const meshName = name.toLowerCase();
+                  return (
+                    !meshName.includes("frame") &&
+                    !meshName.includes("border") &&
+                    !meshName.includes("wood")
+                  );
+                });
+
+                if (nonFrameMaterial) {
+                  targetMaterial = nonFrameMaterial.material;
+                  debugLog(
+                    `Using non-frame material for poster: ${nonFrameMaterial.name}`,
+                    "warning"
+                  );
+                } else if (allMaterials.length > 0) {
+                  targetMaterial = allMaterials[0].material;
+                  debugLog(
+                    `Using fallback material for poster: ${allMaterials[0].name}`,
+                    "warning"
+                  );
+                } else {
+                  // If no material found, create one for the largest mesh
+                  if (largestMesh) {
+                    largestMesh.material = new THREE.MeshStandardMaterial({
+                      color: 0xffffff,
+                    });
+                    targetMaterial = largestMesh.material;
+                    debugLog(
+                      `Created new material for poster canvas: ${largestMesh.name}`,
+                      "success"
+                    );
+                  } else {
+                    debugLog(
+                      `No suitable material or mesh found for poster`,
+                      "error"
+                    );
+                  }
+                }
+              }
+
+              // Additional debugging for OBJ files
+              if (isOBJ) {
+                debugLog(
+                  `OBJ Poster - Total materials: ${allMaterials.length}`,
+                  "info"
+                );
+                debugLog(
+                  `OBJ Poster - Canvas mesh: ${
+                    posterCanvas ? posterCanvas.name : "None"
+                  }`,
+                  "info"
+                );
+                debugLog(
+                  `OBJ Poster - Frame mesh: ${
+                    posterFrame ? posterFrame.name : "None"
+                  }`,
+                  "info"
+                );
+                debugLog(
+                  `OBJ Poster - Target material: ${
+                    targetMaterial ? "Found" : "None"
+                  }`,
+                  "info"
+                );
+              }
+            } else {
+              // Standard handling for other products
+              if (largestMesh && largestMesh.material) {
+                targetMaterial = largestMesh.material;
+                debugLog(
+                  `Target material identified for ${productType}: ${largestMesh.name}`,
+                  "success"
+                );
+              } else {
+                // Fallback: use the first available material
+                if (allMaterials.length > 0) {
+                  targetMaterial = allMaterials[0].material;
+                  debugLog(
+                    `Using fallback material for ${productType}: ${allMaterials[0].name}`,
+                    "warning"
+                  );
+                } else {
+                  debugLog(
+                    `No suitable material found for ${productType}`,
+                    "error"
+                  );
+                }
+              }
+            }
+
+            // Debug logging
+            debugLog(
+              `Total materials processed for ${productType}: ${allMaterials.length}`,
+              "info"
+            );
+            allMaterials.forEach(({ mesh, material, name }, index) => {
+              debugLog(
+                `Material ${index}: ${name} - Color: ${material.color.getHexString()}`,
+                "info"
+              );
+            });
+
+            // Store available materials for debug functionality
+            if (productType === "poster") {
+              availableMaterials = allMaterials;
+              currentMaterialIndex = 0;
+            }
+
+            currentModel = model;
+            scene.add(model);
+
+            // Reapply texture if there was a preserved image
+            if (preserveImage) {
+              uploadedImage = preserveImage;
+              applyTexture(preserveImage);
+
+              // Show the image preview again
+              const preview = document.getElementById("image-preview");
+              preview.src = preserveImage;
+              preview.style.display = "block";
+
+              debugLog(`Reapplied texture to ${productType} model.`, "success");
+            }
+
+            debugLog(
+              `Loaded ${productType} ${
+                isOBJ ? "OBJ" : "GLB"
+              } model successfully.`,
+              "success"
+            );
+            console.log(`${productType} loaded successfully!`);
+            loadingIndicator.style.display = "none";
+
+            // Automatically hide meshes defined in the product config
+            const productConfigs = {
+              poster: {
+                hiddenMeshes: ["plane006", "Cube004", "Plane006"],
+              },
+              tshirt: {
+                hiddenMeshes: [],
+              },
+              mug: {
+                hiddenMeshes: [],
+              },
+              cap: {
+                hiddenMeshes: [],
+              },
+            };
+
+            const config = productConfigs[productType];
+            if (
+              config &&
+              config.hiddenMeshes &&
+              Array.isArray(config.hiddenMeshes)
+            ) {
+              config.hiddenMeshes.forEach((meshName) => {
+                currentModel.traverse((child) => {
+                  if (child.isMesh && child.name === meshName) {
+                    child.visible = false;
+                    // Store original visibility state for potential restoration
+                    child.userData.originalVisibility = child.visible;
+                    console.log(`Automatically hidden mesh: ${meshName}`);
+                    debugLog(`Automatically hidden mesh: ${meshName}`, "info");
+                  }
+                });
+              });
+            }
+
+            // Force hide specific meshes for poster regardless of model default state
+            if (productType === "poster") {
+              const posterHiddenMeshes = ["Cube004"];
+              const posterVisibleMeshes = ["Plane007", "plane006", "Plane006"];
+
+              // Hide specified meshes
+              posterHiddenMeshes.forEach((meshName) => {
+                currentModel.traverse((child) => {
+                  if (child.isMesh && child.name === meshName) {
+                    child.visible = false;
+                    child.userData.forceHidden = true;
+                    console.log(`Force hidden poster mesh: ${meshName}`);
+                    debugLog(`Force hidden poster mesh: ${meshName}`, "info");
+                  }
+                });
+              });
+
+              // Ensure specified meshes are visible
+              posterVisibleMeshes.forEach((meshName) => {
+                currentModel.traverse((child) => {
+                  if (child.isMesh && child.name === meshName) {
+                    child.visible = true;
+                    child.userData.forceVisible = true;
+                    console.log(`Force visible poster mesh: ${meshName}`);
+                    debugLog(`Force visible poster mesh: ${meshName}`, "info");
+                  }
+                });
+              });
+            }
+          },
+          (progress) => {
+            const percent = ((progress.loaded / progress.total) * 100).toFixed(
+              1
+            );
+            loadingText.textContent = `Loading ${productType}... ${percent}%`;
+            debugLog(`Loading ${productType}: ${percent}%`, "loading");
+          },
+          (error) => {
+            debugLog(
+              `Error loading ${productType} ${
+                isOBJ ? "OBJ" : "GLB"
+              } model: ${error}`,
+              "error"
+            );
+            loadingIndicator.style.display = "none";
+            // Show error message to user
+            loadingText.textContent = `Error loading ${productType}. Please try again.`;
+          }
+        );
+      }
+
+      // --- Remove Placeholder Model Functions ---
+      /*
+        The createMugModel, createTshirtModel, etc. functions are removed
+        as the focus is on making the GLB loader robust.
+        */
+
+      // Apply texture to model
+      function applyTexture(imageUrl) {
+        if (!targetMaterial) {
+          console.error(
+            "No target material identified on the model to apply texture."
+          );
+          return;
+        }
+
+        // Ensure material is properly configured for texture application
+        if (!targetMaterial.map) {
+          targetMaterial.map = null;
+        }
+
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load(
+          imageUrl,
+          (texture) => {
+            // Configure texture properties to prevent tiling for all products
+            texture.wrapS = THREE.ClampToEdgeWrapping;
+            texture.wrapT = THREE.ClampToEdgeWrapping;
+
+            // Enhanced texture configuration for different products
+            if (currentProduct === "poster") {
+              // Ensure proper aspect ratio for poster
+              texture.flipY = false;
+
+              // Set texture filtering for better quality
+              texture.minFilter = THREE.LinearFilter;
+              texture.magFilter = THREE.LinearFilter;
+            } else {
+              // For other products, also use clamp wrapping to prevent tiling
+              texture.minFilter = THREE.LinearFilter;
+              texture.magFilter = THREE.LinearFilter;
+            }
+
+            // CRITICAL: Ensure the material color doesn't tint the texture
+            const newMaterial = targetMaterial.clone();
+            newMaterial.color.set(0xffffff);
+            newMaterial.map = texture;
+            newMaterial.needsUpdate = true;
+
+            // Replace the material on the mesh
+            if (currentModel) {
+              currentModel.traverse((child) => {
+                if (child.isMesh && child.material === targetMaterial) {
+                  child.material = newMaterial;
+                }
+              });
+            }
+
+            targetMaterial = newMaterial;
+
+            // Store that this material now has a texture
+            targetMaterial.hasTexture = true;
+
+            // Show texture notice
+            const textureNotice = document.getElementById("texture-notice");
+            if (textureNotice) {
+              textureNotice.style.display = "block";
+            }
+
+            console.log(
+              `Texture successfully applied to ${currentProduct} material.`
+            );
+            console.log("Image applied successfully!");
+          },
+          undefined,
+          (error) => {
+            console.error("Error loading texture:", error);
+          }
+        );
+      }
+
+      // Enhanced control sliders with debouncing for better performance
+      const debouncedUpdateTexture = debounce((property, value) => {
+        if (targetMaterial && targetMaterial.map) {
+          switch (property) {
+            case "scale":
+              const textureScale = 1 / value;
+              targetMaterial.map.repeat.set(textureScale, textureScale);
+              break;
+            case "x-position":
+              targetMaterial.map.offset.x = value;
+              break;
+            case "y-position":
+              targetMaterial.map.offset.y = value;
+              break;
+            case "rotation":
+              targetMaterial.map.rotation = value * (Math.PI / 180);
+              break;
+          }
+          targetMaterial.needsUpdate = true;
+        }
+      }, 16); // ~60fps
+
+      // Update UI elements for sliders
+      function updateSliderValue(sliderId, valueSpanId, value) {
+        const slider = document.getElementById(sliderId);
+        const valueSpan = document.getElementById(valueSpanId);
+        if (slider && valueSpan) {
+          valueSpan.textContent = value;
+        }
+      }
+
+      function updatePositionSliderValues(xValue, yValue) {
+        const xValueSpan = document.getElementById("x-position-value");
+        const yValueSpan = document.getElementById("y-position-value");
+        if (xValueSpan) xValueSpan.textContent = xValue.toFixed(1);
+        if (yValueSpan) yValueSpan.textContent = yValue.toFixed(1);
+      }
+
+      function updateTextSliderValues(size, lineHeight, xValue, yValue, rotation) {
+        const textSizeSpan = document.getElementById("text-size-value");
+        const lineHeightSpan = document.getElementById("line-height-value");
+        const textXSpan = document.getElementById("text-x-position-value");
+        const textYSpan = document.getElementById("text-y-position-value");
+        const textRotationSpan = document.getElementById("text-rotation-value");
+
+        if (textSizeSpan) textSizeSpan.textContent = size;
+        if (lineHeightSpan) lineHeightSpan.textContent = lineHeight;
+        if (textXSpan) textXSpan.textContent = xValue;
+        if (textYSpan) textYSpan.textContent = yValue;
+        if (textRotationSpan) textRotationSpan.textContent = rotation;
+      }
+
+      document.getElementById("size-slider").addEventListener("input", (e) => {
+        const value = parseFloat(e.target.value);
+        updateSliderValue("size-slider", "size-value", value);
+        debouncedUpdateTexture("scale", value);
+      });
+
+      document.getElementById("x-position").addEventListener("input", (e) => {
+        const value = parseFloat(e.target.value);
+        updatePositionSliderValues(value, parseFloat(document.getElementById("y-position").value));
+        debouncedUpdateTexture("x-position", value);
+      });
+
+      document.getElementById("y-position").addEventListener("input", (e) => {
+        const value = parseFloat(e.target.value);
+        updatePositionSliderValues(parseFloat(document.getElementById("x-position").value), value);
+        debouncedUpdateTexture("y-position", value);
+      });
+
+      document
+        .getElementById("rotation-slider")
+        .addEventListener("input", (e) => {
+          const value = parseFloat(e.target.value);
+          updateSliderValue("rotation-slider", "rotation-value", value);
+          debouncedUpdateTexture("rotation", value);
+        });
+
+      // Color selection functionality
+      document.querySelectorAll(".color-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // Remove active class from all color buttons
+          document
+            .querySelectorAll(".color-btn")
+            .forEach((b) => b.classList.remove("active"));
+          // Add active class to clicked button
+          btn.classList.add("active");
+
+          const color = btn.dataset.color;
+          const colorMap = {
+            white: 0xffffff,
+            black: 0x000000,
+            blue: 0x007bff,
+            red: 0xdc3545,
+          };
+
+          // Apply color to all materials in the model, preserving textures
+          if (currentModel) {
+            currentModel.traverse((child) => {
+              if (child.isMesh && child.material) {
+                const material = child.material;
+
+                // Check if this material has a texture
+                if (material.map) {
+                  // Keep textured materials white to preserve the image
+                  console.log(`Preserved texture on ${child.name}`);
+                } else {
+                  // Special handling for t-shirt materials
+                  if (currentProduct === "tshirt") {
+                    // Apply color to all t-shirt fabric parts (front, back, body)
+                    if (
+                      meshName.includes("fabric") ||
+                      meshName.includes("cloth") ||
+                      meshName.includes("front") ||
+                      meshName.includes("back") ||
+                      meshName.includes("body")
+                    ) {
+                      material.color.setHex(colorMap[color]);
+                      console.log(
+                        `Applied color ${color} to t-shirt fabric: ${child.name}`
+                      );
+                    } else {
+                      // Keep non-fabric parts (tags, seams) as they are
+                      console.log(`Preserved non-fabric part: ${child.name}`);
+                    }
+                  } else {
+                    // Standard color application for other products
+                    material.color.setHex(colorMap[color]);
+                    console.log(`Applied color ${color} to ${child.name}`);
+                  }
+                }
+                material.needsUpdate = true;
+              }
+            });
+
+            // Show texture notice if any material has a texture
+            const hasTexture = checkIfModelHasTexture();
+            const textureNotice = document.getElementById("texture-notice");
+            if (textureNotice) {
+              textureNotice.style.display = hasTexture ? "block" : "none";
+            }
+
+            // Show notification
+            if (hasTexture) {
+              notifications.show(
+                `Color applied to non-image parts only`,
+                "info"
+              );
+            } else {
+              notifications.show(
+                `${color} color applied successfully!`,
+                "success"
+              );
+            }
+          }
+        });
+      });
+
+      // Function to check if the current model has any textures
+      function checkIfModelHasTexture() {
+        if (!currentModel) return false;
+
+        let hasTexture = false;
+        currentModel.traverse((child) => {
+          if (child.isMesh && child.material && child.material.map) {
+            hasTexture = true;
+          }
+        });
+        return hasTexture;
+      }
+
+      // Frame style selection for posters
+      document.querySelectorAll(".frame-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".frame-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const frameStyle = btn.dataset.frame;
+          console.log(`Frame style changed to: ${frameStyle}`);
+
+          // Here you could implement frame material changes
+          // For now, just log the selection
+          if (currentProduct === "poster" && currentModel) {
+            // Apply frame style changes
+            applyFrameStyle(frameStyle);
+          }
+        });
+      });
+
+      // Apply frame style to poster
+      function applyFrameStyle(style) {
+        if (!currentModel || currentProduct !== "poster") return;
+
+        const frameMeshes = [];
+        currentModel.traverse((child) => {
+          if (
+            child.isMesh &&
+            (child.name.toLowerCase().includes("frame") ||
+              child.name.toLowerCase().includes("border"))
+          ) {
+            frameMeshes.push(child);
+          }
+        });
+
+        if (frameMeshes.length === 0) {
+          // Fallback for OBJ files with no named parts
+          let largestNonCanvasMesh = null;
+          let maxArea = 0;
+          currentModel.traverse((child) => {
+            if (child.isMesh && child !== posterCanvasMesh) {
+              const geometry = child.geometry;
+              if (geometry) {
+                const meshSize = new THREE.Box3()
+                  .setFromObject(child)
+                  .getSize(new THREE.Vector3());
+                const area =
+                  meshSize.x * meshSize.y +
+                  meshSize.y * meshSize.z +
+                  meshSize.z * meshSize.x;
+                if (area > maxArea) {
+                  maxArea = area;
+                  largestNonCanvasMesh = child;
+                }
+              }
+            }
+          });
+          if (largestNonCanvasMesh) frameMeshes.push(largestNonCanvasMesh);
+        }
+
+        frameMeshes.forEach((mesh) => {
+          const material = mesh.material;
+          if (material && !material.map) {
+            // Only change frame if it doesn't have a texture
+            switch (style) {
+              case "wood":
+                material.color.setHex(0x8b4513); // Saddle brown
+                break;
+              case "metal":
+                material.color.setHex(0x708090); // Slate gray
+                break;
+              case "minimal":
+                material.color.setHex(0xffffff); // White
+                break;
+            }
+            material.needsUpdate = true;
+            debugLog(`Applied frame style to: ${mesh.name}`, "success");
+          }
+        });
+      }
+
+      // Reset view
+      document
+        .getElementById("reset-view-btn")
+        .addEventListener("click", () => {
+          if (controls) {
+            controls.reset();
+          }
+        });
+
+      // Product selection
+      document.querySelectorAll(".product-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          document
+            .querySelectorAll(".product-item")
+            .forEach((p) => p.classList.remove("featured"));
+          item.classList.add("featured");
+
+          const price = item.querySelector(".product-price").textContent;
+          document.querySelector(".preview-price").textContent = price;
+
+          const productType = item.dataset.product;
+          loadProductModel(productType);
+        });
+      });
+
+      // Photo card interactions
+      document.querySelectorAll(".photo-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const description =
+            card.querySelector(".photo-placeholder").textContent;
+          console.log("Cargando foto:", description);
+        });
+      });
+
+      // Search functionality
+      document.querySelector(".search-box").addEventListener("input", (e) => {
+        console.log("Buscando:", e.target.value);
+      });
+
+      // Order button
+      document.querySelector(".order-btn").addEventListener("click", () => {
+        notifications.show(
+          "¡Pedido procesado! Redirigiendo al checkout...",
+          "success"
+        );
+      });
+
+      // Handle window resize
+      window.addEventListener("resize", () => {
+        if (camera && renderer) {
+          const container = document.getElementById("3d-preview");
+          camera.aspect = container.clientWidth / container.clientHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+      });
+
+      // Enhanced initialization
+      function initializeApplication() {
+        // Initialize 3D scene
+        init3DScene();
+
+        // Show welcome message
+        console.log("3D Configurator initialized successfully!");
+
+        // Add keyboard shortcuts
+        document.addEventListener("keydown", (e) => {
+          if (e.ctrlKey || e.metaKey) {
+            switch (e.key) {
+              case "r":
+                e.preventDefault();
+
+                break;
+            }
+          }
+        });
+      }
+
+      // Enhanced reset function
+      function resetAll() {
+        if (targetMaterial && targetMaterial.map) {
+          targetMaterial.map = null;
+          targetMaterial.needsUpdate = true;
+        }
+
+        // Reset all controls
+        document.getElementById("size-slider").value = 1;
+        document.getElementById("x-position").value = 0;
+        document.getElementById("y-position").value = 0;
+        document.getElementById("rotation-slider").value = 0;
+
+        // Clear upload
+        uploadedImage = null;
+        document.getElementById("image-preview").style.display = "none";
+
+        // Reset materials to default color
+        if (currentModel) {
+          currentModel.traverse((child) => {
+            if (child.isMesh && child.material) {
+              child.material.color.setHex(0xffffff);
+              child.material.needsUpdate = true;
+            }
+          });
+        }
+
+        // Ensure poster meshes maintain their desired state after reset
+        if (currentProduct === "poster" && currentModel) {
+          const posterHiddenMeshes = ["Cube004"];
+          const posterVisibleMeshes = ["Plane007", "plane006", "Plane006"];
+
+          // Keep specified meshes hidden
+          posterHiddenMeshes.forEach((meshName) => {
+            currentModel.traverse((child) => {
+              if (child.isMesh && child.name === meshName) {
+                child.visible = false;
+                child.userData.forceHidden = true;
+              }
+            });
+          });
+
+          // Keep specified meshes visible
+          posterVisibleMeshes.forEach((meshName) => {
+            currentModel.traverse((child) => {
+              if (child.isMesh && child.name === meshName) {
+                child.visible = true;
+                child.userData.forceVisible = true;
+              }
+            });
+          });
+        }
+
+        console.log("Reset complete!");
+        notifications.show("Reset complete!", "success");
+      }
+
+      // Initialize application when page loads
+      window.addEventListener("load", () => {
+        // initializeApplication();
+      });
+    </script>
+    <script src="./controller.jsx"></script>
+
+    <deepl-input-controller translate="no"
+      ><template shadowrootmode="open"
+        ><link
+          rel="stylesheet"
+          href="chrome-extension://cofdbpoegempjloogbagkncekinflcnj/build/content.css" />
+        <div dir="ltr" style="visibility: initial !important">
+          <div class="dl-input-translation-container svelte-95aucy">
+            <div></div>
+          </div></div></template
+    ></deepl-input-controller>
+  </body>
+</html>
