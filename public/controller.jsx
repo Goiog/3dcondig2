@@ -8,7 +8,7 @@ let IniModel = true;
 let Loading = false;
 
 const Canvas = document.querySelector("#canvas");
-Canvas.src = `https://damn-3dproduct-mpb8.vercel.app/?model=${SELECTED_MODEL}`;
+Canvas.src = `https://3d-config-seven.vercel.app/?model=${SELECTED_MODEL}`;
 
 // enable loading anim
 document.querySelector(".loading-indicator").style.display = "block";
@@ -380,7 +380,7 @@ document.querySelector(".product-buttons").addEventListener("click", (e) => {
       Y_slider.max = 707;
     }
 
-    Canvas.src = `https://damn-3dproduct-mpb8.vercel.app/?model=${SELECTED_MODEL}`;
+    Canvas.src = `https://3d-config-seven.vercel.app/?model=${SELECTED_MODEL}`;
     document.querySelector(".loading-indicator").style.display = "block";
 
     // Update canvas for new model
@@ -1265,7 +1265,7 @@ function postToIframe(data) {
   if (Canvas && Canvas.contentWindow) {
     Canvas.contentWindow.postMessage(
       data,
-      "https://damn-3dproduct-mpb8.vercel.app"
+      "https://3d-config-seven.vercel.app"
     );
   }
 }
