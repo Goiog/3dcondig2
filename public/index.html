@@ -625,7 +625,7 @@
 
                     <!-- Canvas / Image -->
                     <img id="mug-2d-preview" alt="2D Mug Design" 
-                         style="max-width: 83%; left:20px;border: 1px solid #ddd; border-radius: 8px; position: relative; z-index: 1;" />
+                         style="max-width: 83%; left:20px;border: 1px solid #ddd; border-radius: 8px; position: relative; z-index: 1; cursor: grab;" />
 
                     <!-- Layout Overlay (your uploaded PNG) -->
                     <img src="Damn - Digital Hub_files/Layout_Mug.png" alt="Mug layout" 
@@ -638,8 +638,8 @@
                       type="range"
                       class="control-slider"
                       id="size-slider"
-                      min="100"
-                      max="920"
+                      min="10"
+                      max="2000"
                       step="10"
                       value="920"
                     />
@@ -693,7 +693,7 @@
                         type="range"
                         class="control-slider"
                         id="x-position"
-                        min="12"
+                        min="-800"
                         max="806"
                         step="0.1"
                         value="0"
@@ -702,7 +702,7 @@
                         type="range"
                         class="control-slider"
                         id="y-position"
-                        min="-21"
+                        min="-800"
                         max="823"
                         step="0.1"
                         value="0"
@@ -2023,17 +2023,7 @@
       // Event listener for image upload
       const imageUploadInput = document.getElementById("image-upload");
       const uploadArea = document.getElementById("upload-area");
-      const imagePreview = document.createElement("img");
-      imagePreview.id = "image-preview";
-      imagePreview.style.cssText = `
-          max-width: 100%;
-          max-height: 200px;
-          margin-top: 10px;
-          border-radius: 8px;
-          display: none;
-          cursor: pointer;
-      `;
-      uploadArea.parentNode.insertBefore(imagePreview, uploadArea.nextSibling);
+      
 
       // Image upload is now handled entirely by controller.jsx to avoid duplicate file dialogs
 

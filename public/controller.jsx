@@ -224,18 +224,25 @@ document.querySelector(".product-buttons").addEventListener("click", (e) => {
     document.querySelector(".selected_layer")?.classList.remove("selected_layer");
 
     // Set slider ranges depending on product ...
-    if (SELECTED_MODEL === "Mug") {
-      size_slider_image.max = 920;
-      size_slider_image.min = 100;
-      X_slider_image.min = 12;
-      X_slider_image.max = 806;
-      Y_slider_image.min = -21;
-      Y_slider_image.max = 823;
-      X_slider.min = 12;
-      X_slider.max = 806;
-      Y_slider.min = -21;
-      Y_slider.max = 823;
-    } else if (SELECTED_MODEL === "Shirt") {
+      if (SELECTED_MODEL === "Mug") {
+        const container = document.querySelector("#iframe_div");
+        const rect = container.getBoundingClientRect();
+
+        size_slider_image.min = 0;   // minimum zoom
+        size_slider_image.max = 900;  // maximum zoom
+        size_slider_image.value = 400; // starting zoom
+
+        X_slider_image.min = 0;
+        X_slider_image.max = rect.width;
+        Y_slider_image.min = 0;
+        Y_slider_image.max = rect.height;
+
+        X_slider.min = 0;
+        X_slider.max = rect.width;
+        Y_slider.min = 0;
+        Y_slider.max = rect.height;
+      }
+else if (SELECTED_MODEL === "Shirt") {
       X_slider.min = 245;
       X_slider.max = 427;
       Y_slider.min = 272;
@@ -589,24 +596,28 @@ Y_slider.addEventListener("input", (e) => {
 rot_slider.addEventListener("input", (e) => {
   TextMessageWrapper(() => {
     const newValue = parseInt(e.target.value);
-
     const selectedObj = Texts[selectedText];
 
     // Initialize if not set
     if (selectedObj.prevRotation === undefined) {
       selectedObj.prevRotation = newValue;
+      selectedObj.angle = 0; // Initialize angle if not set
     }
 
     // Calculate difference from previous
     const diff = newValue - selectedObj.prevRotation;
 
-    // Apply difference to current left
+    // Apply difference to current angle (rotation around center)
     selectedObj.angle += diff * 0.5;
 
     // Update previous value
     selectedObj.prevRotation = newValue;
 
-    updateText({ angle: Texts[selectedText].angle });
+    // Send rotation update with center-based rotation flag
+    updateText({ 
+      angle: selectedObj.angle,
+      rotateFromCenter: true // Flag to indicate center-based rotation
+    });
   });
 });
 
@@ -803,19 +814,56 @@ document.getElementById("image-upload").addEventListener("input", (e) => {
     reader.onload = (event) => {
       const imageUrl = event.target.result;
       const id = crypto.randomUUID();
-      Images.push({
+
+      // Add default properties including scale for the sliders
+      const newImageObject = {
         _id: id,
         width: 500,
         height: 500,
         top: 20,
         left: 20,
+        scale: 400, // Default scale value
+        angle: 0,   // Default rotation
         url: imageUrl,
-      });
+      };
+
+      Images.push(newImageObject);
       CreateImageLayer(imageUrl, id);
+
+      // Auto-select the newly uploaded image
+      selectedImage = Images.length - 1;
+
+      // Update UI to show this layer as selected
+      document.querySelector(".selected_layer")?.classList.remove("selected_layer");
+      document.querySelector(`[data-id='${id}']`).classList.add("selected_layer");
+
+      // Update slider values to match the new image properties
+      X_slider_image.value = newImageObject.left;
+      Y_slider_image.value = newImageObject.top;
+      size_slider_image.value = newImageObject.scale;
+      rot_slider_image.value = newImageObject.angle * 2; // Rotation slider uses 2x multiplier
+
+      // Switch to Image customization tab if not already active
+      if (SelectedCustomization !== "Image") {
+        document.querySelector("#text-customization").style.display = "none";
+        document.querySelector("#image-customization").style.display = "block";
+
+        document.querySelector(".customization-buttons>button.active").classList.remove("active");
+        document.querySelector(".customization-buttons button:first-child").classList.add("active");
+        SelectedCustomization = "Image";
+      }
+
+      // Send to iframe
       postToIframe({
         type: "add-image",
         payload: { url: imageUrl, _id: id },
       });
+
+      // Auto-select the layer in the 3D canvas as well
+      setTimeout(() => {
+        postToIframe({ type: "select-layer", payload: { _id: id } });
+      }, 100);
+
       e.target.value = "";
     };
 
@@ -852,24 +900,28 @@ Y_slider_image.addEventListener("input", (e) => {
 rot_slider_image.addEventListener("input", (e) => {
   ImageMessageWrapper(() => {
     const newValue = parseInt(e.target.value);
-
     const selectedObj = Images[selectedImage];
 
     // Initialize if not set
     if (selectedObj.prevRotation === undefined) {
       selectedObj.prevRotation = newValue;
+      selectedObj.angle = 0; // Initialize angle if not set
     }
 
     // Calculate difference from previous
     const diff = newValue - selectedObj.prevRotation;
 
-    // Apply difference to current left
+    // Apply difference to current angle (rotation around center)
     selectedObj.angle += diff * 0.5;
 
     // Update previous value
     selectedObj.prevRotation = newValue;
 
-    updateImage({ angle: Images[selectedImage].angle });
+    // Send rotation update - the 3D iframe should handle center-based rotation
+    updateImage({ 
+      angle: selectedObj.angle,
+      rotateFromCenter: true // Flag to indicate center-based rotation
+    });
   });
 });
 
@@ -940,6 +992,12 @@ document.querySelector(".remove-bg-btn").addEventListener("click", (e) => {
         payload: { url: processedImageUrl, _id: newId }
       });
 
+      // Remove the preview image element completely if it exists
+      const imagePreview = document.getElementById("image-preview");
+      if (imagePreview) {
+        imagePreview.remove();
+      }
+
       // ✅ Apply texture to 3D model
       postToIframe({
         type: "apply-texture",
@@ -1006,17 +1064,20 @@ function requestCanvasSnapshot() {
     );
   }
 }
-//  changes to model
-function postToIframe(data) {
+
+// Optimized postToIframe that avoids snapshot spam during drag operations
+function postToIframe(data, skipSnapshot = false) {
   if (Canvas && Canvas.contentWindow) {
     Canvas.contentWindow.postMessage(
       data,
       "https://3d-config-seven.vercel.app"
     );
 
-    // After sending any update to the 3D app, request a fresh 2D snapshot.
-    // The small delay lets the iframe apply changes before snapshotting.
-    setTimeout(requestCanvasSnapshot, 120);
+    // Only request snapshot if not explicitly skipped and not during active drag
+    if (!skipSnapshot && !isDragging) {
+      // Small delay lets the iframe apply changes before snapshotting
+      setTimeout(requestCanvasSnapshot, 120);
+    }
   }
 }
 //  update Text
@@ -1024,9 +1085,10 @@ const updateText = (payload) => {
   postToIframe({ type: "update-text", payload: payload });
 };
 
-//  update image
+//  update image with drag optimization
 const updateImage = (payload) => {
-  postToIframe({ type: "update-image", payload: payload });
+  // Skip automatic snapshots during drag to reduce load
+  postToIframe({ type: "update-image", payload: payload }, isDragging);
 };
 
 //  select layer
@@ -1037,15 +1099,41 @@ const updateSelectedLayer = (payload) => {
     .classList.add("selected_layer");
 };
 
-// Interactive 2D Canvas functionality
+// Interactive 2D Canvas functionality with optimized performance
 let isDragging = false;
 let dragStartX = 0;
 let dragStartY = 0;
 let dragStartLeft = 0;
 let dragStartTop = 0;
+let pendingUpdate = null;
+let lastSnapshotRequest = 0;
+const SNAPSHOT_THROTTLE_MS = 100; // Limit snapshots to 10fps during drag
+
+// Throttled update function to batch position changes
+const throttledImageUpdate = (() => {
+  let timeoutId = null;
+  return (left, top) => {
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      if (selectedImage !== false && Images[selectedImage]) {
+        Images[selectedImage].left = left;
+        Images[selectedImage].top = top;
+        updateImage({ left, top });
+
+        // Request snapshot only if enough time has passed
+        const now = Date.now();
+        if (now - lastSnapshotRequest > SNAPSHOT_THROTTLE_MS) {
+          lastSnapshotRequest = now;
+          setTimeout(requestCanvasSnapshot, 50); // Small delay to let 3D render
+        }
+      }
+    }, 16); // ~60fps for smooth visual feedback
+  };
+})();
 
 // Add drag functionality to 2D mug preview
-document.addEventListener("DOMContentLoaded", () => {
+function setupMugPreviewInteraction() {
+
   const mugPreview = document.getElementById("mug-2d-preview");
   if (mugPreview) {
     // Mouse down event
@@ -1053,60 +1141,148 @@ document.addEventListener("DOMContentLoaded", () => {
       if (selectedImage === false) {
         return; // No image selected
       }
-      
+
       e.preventDefault();
       isDragging = true;
       dragStartX = e.clientX;
       dragStartY = e.clientY;
       dragStartLeft = parseFloat(X_slider_image.value);
       dragStartTop = parseFloat(Y_slider_image.value);
-      
+
       mugPreview.style.cursor = "grabbing";
     });
 
-    // Mouse move event (on document to handle mouse leaving the element)
+    // Mouse move event with optimized throttling
     document.addEventListener("mousemove", (e) => {
       if (!isDragging || selectedImage === false) return;
-      
+
       e.preventDefault();
-      
+
       // Calculate movement delta
       const deltaX = e.clientX - dragStartX;
       const deltaY = e.clientY - dragStartY;
-      
-      // Convert pixel movement to slider values (adjust multiplier as needed)
-      const sensitivity = 2; // Adjust this to change drag sensitivity
+
+      // Convert pixel movement to slider values
+      const sensitivity = 2;
       const newLeft = Math.max(parseFloat(X_slider_image.min), 
                               Math.min(parseFloat(X_slider_image.max), 
                                       dragStartLeft + (deltaX * sensitivity)));
       const newTop = Math.max(parseFloat(Y_slider_image.min), 
                              Math.min(parseFloat(Y_slider_image.max), 
                                      dragStartTop + (deltaY * sensitivity)));
-      
-      // Update sliders
+
+      // Update sliders immediately for visual feedback
       X_slider_image.value = newLeft;
       Y_slider_image.value = newTop;
-      
-      // Update the image position
-      if (selectedImage !== false && Images[selectedImage]) {
-        Images[selectedImage].left = newLeft;
-        Images[selectedImage].top = newTop;
-        updateImage({ left: newLeft, top: newTop });
-      }
+
+      // Use throttled update for 3D scene and snapshots
+      throttledImageUpdate(newLeft, newTop);
     });
 
-    // Mouse up event (on document to handle mouse up anywhere)
+    // Mouse up event - final update
     document.addEventListener("mouseup", (e) => {
       if (isDragging) {
         isDragging = false;
         mugPreview.style.cursor = "grab";
+
+        // Ensure final position is applied
+        const finalLeft = parseFloat(X_slider_image.value);
+        const finalTop = parseFloat(Y_slider_image.value);
+
+        if (selectedImage !== false && Images[selectedImage]) {
+          Images[selectedImage].left = finalLeft;
+          Images[selectedImage].top = finalTop;
+          updateImage({ left: finalLeft, top: finalTop });
+
+          // Request final snapshot after a brief delay
+          setTimeout(requestCanvasSnapshot, 100);
+        }
       }
     });
+
+    // Mouse wheel zoom event
+    mugPreview.addEventListener("wheel", (e) => {
+      if (selectedImage === false) {
+        return; // No image selected
+      }
+
+      e.preventDefault();
+
+      // Get current scale and position values
+      const currentScale = parseFloat(size_slider_image.value);
+      const currentLeft = parseFloat(X_slider_image.value);
+      const currentTop = parseFloat(Y_slider_image.value);
+      const minScale = parseFloat(size_slider_image.min);
+      const maxScale = parseFloat(size_slider_image.max);
+
+      // deltaY > 0 means scrolling down (zoom out), deltaY < 0 means scrolling up (zoom in)
+      const zoomSensitivity = 40; // larger = slower zoom
+      const zoomDelta = (e.deltaY < 0 ? 1 : -1) * (maxScale - minScale) / zoomSensitivity;
+
+      // Calculate new scale value
+      const newScale = Math.max(minScale, Math.min(maxScale, currentScale + zoomDelta));
+
+      // Update slider + sync with 3D model
+      if (newScale !== currentScale) {
+        // Calculate scale ratio for center-based scaling
+        const scaleRatio = newScale / currentScale;
+
+        // Get mouse position relative to the preview element
+        const rect = mugPreview.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Convert mouse position to image coordinates (normalized to image size)
+        const imageWidth = Images[selectedImage].width || 500;
+        const imageHeight = Images[selectedImage].height || 500;
+        const normalizedMouseX = (mouseX / rect.width) * imageWidth;
+        const normalizedMouseY = (mouseY / rect.height) * imageHeight;
+
+        // Calculate new position to keep the point under the mouse stationary
+        const newLeft = normalizedMouseX - (normalizedMouseX - currentLeft) * scaleRatio;
+        const newTop = normalizedMouseY - (normalizedMouseY - currentTop) * scaleRatio;
+
+        // Constrain to slider bounds
+        const constrainedLeft = Math.max(parseFloat(X_slider_image.min), 
+                                        Math.min(parseFloat(X_slider_image.max), newLeft));
+        const constrainedTop = Math.max(parseFloat(Y_slider_image.min), 
+                                       Math.min(parseFloat(Y_slider_image.max), newTop));
+
+        // Update sliders
+        size_slider_image.value = newScale;
+        X_slider_image.value = constrainedLeft;
+        Y_slider_image.value = constrainedTop;
+
+        // Update image properties
+        Images[selectedImage].scale = newScale;
+        Images[selectedImage].left = constrainedLeft;
+        Images[selectedImage].top = constrainedTop;
+
+        // Update the 3D iframe
+        updateImage({ 
+          scale: newScale,
+          left: constrainedLeft,
+          top: constrainedTop
+        });
+
+        // Refresh snapshot preview
+        setTimeout(requestCanvasSnapshot, 50);
+      }
+    });
+
 
     // Set initial cursor style
     mugPreview.style.cursor = "grab";
     mugPreview.style.userSelect = "none"; // Prevent text selection while dragging
   }
+}
+
+// Call setup function when DOM is ready and also when canvas loads
+document.addEventListener("DOMContentLoaded", setupMugPreviewInteraction);
+
+// Also setup when the canvas loads (in case the preview image loads later)
+Canvas.addEventListener("load", () => {
+  setupMugPreviewInteraction();
 });
 
 // receive messages
