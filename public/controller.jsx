@@ -1109,26 +1109,40 @@ let pendingUpdate = null;
 let lastSnapshotRequest = 0;
 const SNAPSHOT_THROTTLE_MS = 100; // Limit snapshots to 10fps during drag
 
-// Throttled update function to batch position changes
-const throttledImageUpdate = (() => {
-  let timeoutId = null;
-  return (left, top) => {
-    if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      if (selectedImage !== false && Images[selectedImage]) {
-        Images[selectedImage].left = left;
-        Images[selectedImage].top = top;
-        updateImage({ left, top });
-
-        // Request snapshot only if enough time has passed
-        const now = Date.now();
-        if (now - lastSnapshotRequest > SNAPSHOT_THROTTLE_MS) {
-          lastSnapshotRequest = now;
-          setTimeout(requestCanvasSnapshot, 50); // Small delay to let 3D render
-        }
+// Optimized update function for smooth dragging
+const optimizedImageUpdate = (() => {
+  let rafId = null;
+  let pendingUpdate = null;
+  
+  return (left, top, immediate = false) => {
+    pendingUpdate = { left, top };
+    
+    if (immediate) {
+      // Execute immediately for final position
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
       }
-    }, 16); // ~60fps for smooth visual feedback
+      executeUpdate();
+    } else if (!rafId) {
+      // Use requestAnimationFrame for smooth updates during drag
+      rafId = requestAnimationFrame(executeUpdate);
+    }
   };
+  
+  function executeUpdate() {
+    rafId = null;
+    if (pendingUpdate && selectedImage !== false && Images[selectedImage]) {
+      const { left, top } = pendingUpdate;
+      Images[selectedImage].left = left;
+      Images[selectedImage].top = top;
+      
+      // Send update to iframe without requesting snapshot (iframe handles it)
+      updateImage({ left, top });
+      
+      pendingUpdate = null;
+    }
+  }
 })();
 
 // Add drag functionality to 2D mug preview
@@ -1152,7 +1166,7 @@ function setupMugPreviewInteraction() {
       mugPreview.style.cursor = "grabbing";
     });
 
-    // Mouse move event with optimized throttling
+    // Mouse move event with optimized updates
     document.addEventListener("mousemove", (e) => {
       if (!isDragging || selectedImage === false) return;
 
@@ -1175,8 +1189,8 @@ function setupMugPreviewInteraction() {
       X_slider_image.value = newLeft;
       Y_slider_image.value = newTop;
 
-      // Use throttled update for 3D scene and snapshots
-      throttledImageUpdate(newLeft, newTop);
+      // Use optimized update for smooth dragging
+      optimizedImageUpdate(newLeft, newTop);
     });
 
     // Mouse up event - final update
@@ -1185,17 +1199,16 @@ function setupMugPreviewInteraction() {
         isDragging = false;
         mugPreview.style.cursor = "grab";
 
-        // Ensure final position is applied
+        // Ensure final position is applied immediately
         const finalLeft = parseFloat(X_slider_image.value);
         const finalTop = parseFloat(Y_slider_image.value);
 
         if (selectedImage !== false && Images[selectedImage]) {
           Images[selectedImage].left = finalLeft;
           Images[selectedImage].top = finalTop;
-          updateImage({ left: finalLeft, top: finalTop });
-
-          // Request final snapshot after a brief delay
-          setTimeout(requestCanvasSnapshot, 100);
+          
+          // Use immediate update for final position
+          optimizedImageUpdate(finalLeft, finalTop, true);
         }
       }
     });
