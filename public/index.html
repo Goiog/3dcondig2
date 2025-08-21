@@ -2023,7 +2023,18 @@
       // Event listener for image upload
       const imageUploadInput = document.getElementById("image-upload");
       const uploadArea = document.getElementById("upload-area");
-      
+      const imagePreview = document.createElement("img");
+      imagePreview.id = "image-preview";
+      imagePreview.style.cssText = `
+          max-width: 100%;
+          max-height: 200px;
+          margin-top: 10px;
+          border-radius: 8px;
+          display: none !important;
+          visibility: hidden;
+          cursor: pointer;
+      `;
+      uploadArea.parentNode.insertBefore(imagePreview, uploadArea.nextSibling);
 
       // Image upload is now handled entirely by controller.jsx to avoid duplicate file dialogs
 
