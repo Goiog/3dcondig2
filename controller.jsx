@@ -185,8 +185,94 @@ const rot_slider_image = document.querySelector(
   "#image-customization #rotation-slider"
 );
 
+// Function to show centered loading notification
+function showCenteredLoadingNotification(message) {
+  // Remove existing centered notification if any
+  const existingNotification = document.getElementById("centered-loading-notification");
+  if (existingNotification) {
+    existingNotification.remove();
+  }
+
+  // Create centered loading notification
+  const notification = document.createElement("div");
+  notification.id = "centered-loading-notification";
+  notification.style.cssText = `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  `;
+
+  // Add loading spinner
+  const spinner = document.createElement("div");
+  spinner.style.cssText = `
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  `;
+
+  // Add CSS animation for spinner
+  if (!document.getElementById("spinner-animation")) {
+    const style = document.createElement("style");
+    style.id = "spinner-animation";
+    style.textContent = `
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const text = document.createElement("span");
+  text.textContent = message;
+
+  notification.appendChild(spinner);
+  notification.appendChild(text);
+
+  // Add to the iframe container
+  const iframeDiv = document.getElementById("iframe_div");
+  if (iframeDiv) {
+    iframeDiv.style.position = "relative";
+    iframeDiv.appendChild(notification);
+  }
+}
+
+// Function to hide centered loading notification
+function hideCenteredLoadingNotification() {
+  const notification = document.getElementById("centered-loading-notification");
+  if (notification) {
+    notification.style.opacity = "0";
+    notification.style.transform = "translate(-50%, -50%) scale(0.9)";
+    notification.style.transition = "all 0.3s ease";
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }
+}
+
 Canvas.addEventListener("load", (e) => {
   document.querySelector(".loading-indicator").style.display = "none";
+  // Hide centered loading notification when iframe loads
+  hideCenteredLoadingNotification();
+  
   if (!IniModel) {
     setTimeout(() => {
       postToIframe({
@@ -196,6 +282,124 @@ Canvas.addEventListener("load", (e) => {
     }, 1000);
   }
 });
+
+// Add error handling for iframe load errors
+Canvas.addEventListener("error", (e) => {
+  document.querySelector(".loading-indicator").style.display = "none";
+  hideCenteredLoadingNotification();
+  
+  // Show error notification
+  showCenteredLoadingNotification(`Failed to load ${SELECTED_MODEL} model`);
+  setTimeout(() => {
+    hideCenteredLoadingNotification();
+  }, 3000);
+});
+
+// Map each model to its 2D preview image
+// Map each model to its preview image and styles
+const model2DConfigs = {
+  Mug: {
+    preview: "Damn - Digital Hub_files/Layout_Mug.png",
+    previewStyle: {
+      maxWidth: "83%",
+      top:"0px",
+      left:"20px",
+      margin: "0 auto",
+      cursor: "grab",
+      border: "1px dashed #aaa",
+      borderRadius: "8px",
+      position: "relative",
+      marginBottom: "10px",
+      zIndex: "1"
+    },
+    overlayStyle: {
+      position: "absolute",
+      top: "5px",
+      bottom: "-3px",
+      maxWidth: "100%",
+      left: "50%",
+      pointerEvents: "none",
+      transform: "translateX(-50%)",
+      zIndex: "2"
+    }
+  },
+  Shirt: {
+    preview: "Damn - Digital Hub_files/Layout_Shirt.png",
+    previewStyle: {
+      maxWidth: "25%",
+      top:"60px",
+      left:"90px",
+      margin: "0 auto",
+      cursor: "grab",
+      border: "1px dashed #aaa",
+      borderRadius: "8px",
+      position: "relative",
+      marginBottom: "45px",
+      zIndex: "1"
+    },
+    overlayStyle: {
+      position: "absolute",
+      bottom: "0px",
+      top: "20px",
+      maxWidth: "100%",
+      left: "50%",
+      pointerEvents: "none",
+      transform: "translateX(-50%)",
+      zIndex: "2"
+    }
+  },
+  Cap: {
+    preview: "Damn - Digital Hub_files/Layout_Cap.png",
+    previewStyle: {
+      maxWidth: "60%",
+      top:"45px",
+      left:"52px",
+      margin: "0 auto",
+      cursor: "grab",
+      border: "1px dashed #aaa",
+      borderRadius: "8px",
+      position: "relative",
+      marginBottom: "70px",
+      zIndex: "1"
+    },
+    overlayStyle: {
+      position: "absolute",
+      bottom: "0px",
+      top: "20px",
+      maxWidth: "100%",
+      left: "50%",
+      pointerEvents: "none",
+      transform: "translateX(-50%)",
+      zIndex: "2"
+    }
+  },
+  Poster: {
+    preview: "Damn - Digital Hub_files/Layout_Poster.png",
+    previewStyle: {
+        maxWidth: "56%",
+        top:"10px",
+        left:"52px",
+        margin: "0 auto",
+        cursor: "grab",
+        border: "1px dashed #aaa",
+        borderRadius: "2px",
+        position: "relative",
+        marginBottom: "0px",
+        zIndex: "1"
+      },
+      overlayStyle: {
+        position: "absolute",
+        bottom: "0px",
+        top: "20px",
+        maxWidth: "70%",
+        left: "50%",
+        pointerEvents: "none",
+        transform: "translateX(-50%)",
+        zIndex: "2"
+      }
+    }
+};
+
 
 document.querySelector(".product-buttons").addEventListener("click", (e) => {
   const newModel = e.target.getAttribute("data-product");
@@ -210,18 +414,21 @@ document.querySelector(".product-buttons").addEventListener("click", (e) => {
     IniModel = false;
     SELECTED_MODEL = newModel;
 
-    // ❌ Clear layers so Mug layers don’t leak
-    Texts.length = 0;
-    Images.length = 0;
-    document.querySelector(".text_layers").innerHTML = "";
-    document.querySelector(".image_layers").innerHTML = "";
+    // Show centered loading notification
+    showCenteredLoadingNotification(`Loading ${newModel} model...`);
 
-    // ✅ Tell iframe to clear layers
+    // ✅ Tell iframe to clear layers first
     postToIframe({ type: "clear-layers" });
 
+    // Clear text layers only - preserve images
+    Texts.length = 0;
+    document.querySelector(".text_layers").innerHTML = "";
+
+    // Clear UI selections
     selectedText = false;
     selectedImage = false;
     document.querySelector(".selected_layer")?.classList.remove("selected_layer");
+
 
     // Set slider ranges depending on product ...
       if (SELECTED_MODEL === "Mug") {
@@ -230,40 +437,95 @@ document.querySelector(".product-buttons").addEventListener("click", (e) => {
 
         size_slider_image.min = 0;   // minimum zoom
         size_slider_image.max = 900;  // maximum zoom
-        size_slider_image.value = 400; // starting zoom
+        size_slider_image.value = 1200; // starting zoom
 
-        X_slider_image.min = 0;
-        X_slider_image.max = rect.width;
-        Y_slider_image.min = 0;
-        Y_slider_image.max = rect.height;
+        X_slider_image.min = -1500;
+        X_slider_image.max = 1500;
+        Y_slider_image.min = -1500;
+        Y_slider_image.max = 1500;
 
-        X_slider.min = 0;
-        X_slider.max = rect.width;
-        Y_slider.min = 0;
-        Y_slider.max = rect.height;
+        X_slider.min = -1500;
+        X_slider.max = 1500;
+        Y_slider.min = -1500;
+        Y_slider.max = 1500;
       }
 else if (SELECTED_MODEL === "Shirt") {
-      X_slider.min = 245;
-      X_slider.max = 427;
-      Y_slider.min = 272;
-      Y_slider.max = 748;
+  size_slider_image.min = 50;   // minimum zoom
+  size_slider_image.max = 1500;  // maximum zoom
+  size_slider_image.value = 800; // starting zoom
+
+  X_slider_image.min = -2000;
+  X_slider_image.max = 2000;
+  Y_slider_image.min = -2000;
+  Y_slider_image.max = 2000;
     } else if (SELECTED_MODEL === "Cap") {
-      X_slider.min = 363;
-      X_slider.max = 673;
-      Y_slider.min = 172;
-      Y_slider.max = 745;
-    } else if (SELECTED_MODEL === "Poster") {
-      X_slider.min = 281;
-      X_slider.max = 746;
-      Y_slider.min = 221;
-      Y_slider.max = 707;
+  size_slider_image.min = 0;   // minimum zoom
+    size_slider_image.max = 900;  // maximum zoom
+    size_slider_image.value = 1200; // starting zoom
+
+    X_slider_image.min = -1500;
+    X_slider_image.max = 1500;
+    Y_slider_image.min = -1500;
+    Y_slider_image.max = 1500;
+
+    X_slider.min = -1500;
+    X_slider.max = 1500;
+    Y_slider.min = -1500;
+    Y_slider.max = 1500;
+  } else if (SELECTED_MODEL === "Poster") {
+      // Poster-specific slider ranges for image positioning
+      size_slider_image.min = 50;   // minimum zoom
+      size_slider_image.max = 1500;  // maximum zoom
+      size_slider_image.value = 800; // starting zoom
+
+      X_slider_image.min = -2000;
+      X_slider_image.max = 2000;
+      Y_slider_image.min = -2000;
+      Y_slider_image.max = 2000;
+
+      // Text positioning for Poster
+  size_slider_image.min = 50;   // minimum zoom
+  size_slider_image.max = 1500;  // maximum zoom
+  size_slider_image.value = 800; // starting zoom
+
+  X_slider_image.min = -2000;
+  X_slider_image.max = 2000;
+  Y_slider_image.min = -2000;
+  Y_slider_image.max = 2000;
     }
 
     // Reload the iframe
     Canvas.src = `https://3d-config-seven.vercel.app/?model=${SELECTED_MODEL}`;
     document.querySelector(".loading-indicator").style.display = "block";
+    
+    // Update loading text
+    const loadingText = document.getElementById("loading-text");
+    if (loadingText) {
+      loadingText.textContent = `Loading ${SELECTED_MODEL}...`;
+    }
+
+    // ✅ Update 2D preview according to selected model
+const config = model2DConfigs[newModel];
+    const previewImg = document.getElementById("mug-2d-preview");
+    const overlayImg = document.querySelector('img[alt="Mug layout"]');
+
+    if (config && previewImg) {
+      previewImg.src = config.preview;
+      Object.assign(previewImg.style, config.previewStyle);
+    }
+
+    if (config && overlayImg) {
+      overlayImg.src = config.preview;
+      Object.assign(overlayImg.style, config.overlayStyle);
+    }
+
+    // reload iframe (already in your code)
+    Canvas.src = `https://3d-config-seven.vercel.app/?model=${SELECTED_MODEL}`;
+    document.querySelector(".loading-indicator").style.display = "block";
   }
 });
+
+
 
 const TextMessageWrapper = (func) => {
   if (selectedText === false) {
@@ -307,7 +569,7 @@ document
     }
   });
 
-// add text layer to dom
+// add text Layer to dom
 const CreateTextLayer = (text, id) => {
   // Create the main container
   const textLayer = document.createElement("div");
@@ -853,6 +1115,38 @@ document.getElementById("image-upload").addEventListener("input", (e) => {
         SelectedCustomization = "Image";
       }
 
+      // Load image for interactive canvas
+      const img = new Image();
+      img.onload = () => {
+        canvasImage = img;
+
+        // Synchronize canvas dimensions with 2D preview
+        const mugPreview = document.getElementById("mug-2d-preview");
+        if (mugPreview && interactiveCanvas) {
+          const mugRect = mugPreview.getBoundingClientRect();
+          if (mugRect.width > 0 && mugRect.height > 0) {
+            interactiveCanvas.width = mugRect.width;
+            interactiveCanvas.height = mugRect.height;
+          }
+        }
+
+        // Calculate proper scale to fit image without cropping
+        const scaleX = interactiveCanvas.width / img.width;
+        const scaleY = interactiveCanvas.height / img.height;
+        // Use the smaller scale to ensure the entire image fits
+        const scaleToFit = Math.min(scaleX, scaleY) * 0.8; // 0.8 for some padding
+
+        // Center the image perfectly in the canvas
+        const scaledWidth = img.width * scaleToFit;
+        const scaledHeight = img.height * scaleToFit;
+        canvasImageX = (interactiveCanvas.width - scaledWidth) / 2;
+        canvasImageY = (interactiveCanvas.height - scaledHeight) / 2;
+        canvasImageScale = scaleToFit;
+
+        drawInteractiveCanvas();
+      };
+      img.src = imageUrl;
+
       // Send to iframe
       postToIframe({
         type: "add-image",
@@ -879,6 +1173,7 @@ size_slider_image.addEventListener("input", (e) => {
   ImageMessageWrapper(() => {
     Images[selectedImage].scale = e.target.value;
     updateImage({ scale: e.target.value });
+    updateInteractiveCanvas();
   });
 });
 
@@ -887,6 +1182,7 @@ X_slider_image.addEventListener("input", (e) => {
   ImageMessageWrapper(() => {
     Images[selectedImage].left = e.target.value;
     updateImage({ left: Images[selectedImage].left });
+    updateInteractiveCanvas();
   });
 });
 
@@ -894,6 +1190,7 @@ Y_slider_image.addEventListener("input", (e) => {
   ImageMessageWrapper(() => {
     Images[selectedImage].top = e.target.value;
     updateImage({ top: Images[selectedImage].top });
+    updateInteractiveCanvas();
   });
 });
 
@@ -1109,40 +1406,39 @@ let pendingUpdate = null;
 let lastSnapshotRequest = 0;
 const SNAPSHOT_THROTTLE_MS = 100; // Limit snapshots to 10fps during drag
 
-// Optimized update function for smooth dragging
-const optimizedImageUpdate = (() => {
-  let rafId = null;
-  let pendingUpdate = null;
-  
-  return (left, top, immediate = false) => {
-    pendingUpdate = { left, top };
-    
-    if (immediate) {
-      // Execute immediately for final position
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
+// Interactive Canvas variables
+let interactiveCanvas = null;
+let interactiveCtx = null;
+let canvasImage = null;
+let canvasImageScale = 1;
+let canvasImageX = 0;
+let canvasImageY = 0;
+let isCanvasDragging = false;
+let canvasDragStartX = 0;
+let canvasDragStartY = 0;
+let canvasDragStartImageX = 0;
+let canvasDragStartImageY = 0;
+
+// Throttled update function to batch position changes
+const throttledImageUpdate = (() => {
+  let timeoutId = null;
+  return (left, top) => {
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      if (selectedImage !== false && Images[selectedImage]) {
+        Images[selectedImage].left = left;
+        Images[selectedImage].top = top;
+        updateImage({ left, top });
+
+        // Request snapshot only if enough time has passed
+        const now = Date.now();
+        if (now - lastSnapshotRequest > SNAPSHOT_THROTTLE_MS) {
+          lastSnapshotRequest = now;
+          setTimeout(requestCanvasSnapshot, 50); // Small delay to let 3D render
+        }
       }
-      executeUpdate();
-    } else if (!rafId) {
-      // Use requestAnimationFrame for smooth updates during drag
-      rafId = requestAnimationFrame(executeUpdate);
-    }
+    }, 16); // ~60fps for smooth visual feedback
   };
-  
-  function executeUpdate() {
-    rafId = null;
-    if (pendingUpdate && selectedImage !== false && Images[selectedImage]) {
-      const { left, top } = pendingUpdate;
-      Images[selectedImage].left = left;
-      Images[selectedImage].top = top;
-      
-      // Send update to iframe without requesting snapshot (iframe handles it)
-      updateImage({ left, top });
-      
-      pendingUpdate = null;
-    }
-  }
 })();
 
 // Add drag functionality to 2D mug preview
@@ -1152,8 +1448,38 @@ function setupMugPreviewInteraction() {
   if (mugPreview) {
     // Mouse down event
     mugPreview.addEventListener("mousedown", (e) => {
+      // If no image is selected but we have images, select the first one
+      if (selectedImage === false && Images.length > 0) {
+        selectedImage = 0;
+        const firstImageId = Images[0]._id;
+
+        // Update UI to show this layer as selected
+        document.querySelector(".selected_layer")?.classList.remove("selected_layer");
+        document.querySelector(`[data-id='${firstImageId}']`)?.classList.add("selected_layer");
+
+        // Update slider values to match the selected image properties
+        X_slider_image.value = Images[0].left || 0;
+        Y_slider_image.value = Images[0].top || 0;
+        size_slider_image.value = Images[0].scale || 400;
+        rot_slider_image.value = (Images[0].angle || 0) * 2;
+
+        // Switch to Image customization tab if not already active
+        if (SelectedCustomization !== "Image") {
+          document.querySelector("#text-customization").style.display = "none";
+          document.querySelector("#image-customization").style.display = "block";
+          document.querySelector(".customization-buttons>button.active").classList.remove("active");
+          document.querySelector(".customization-buttons button:first-child").classList.add("active");
+          SelectedCustomization = "Image";
+        }
+
+        // Tell the 3D iframe to select this layer
+        postToIframe({ type: "select-layer", payload: { _id: firstImageId } });
+
+        console.log("Auto-selected first image layer on 2D preview click");
+      }
+
       if (selectedImage === false) {
-        return; // No image selected
+        return; // No image selected and no images available
       }
 
       e.preventDefault();
@@ -1166,7 +1492,7 @@ function setupMugPreviewInteraction() {
       mugPreview.style.cursor = "grabbing";
     });
 
-    // Mouse move event with optimized updates
+    // Mouse move event with optimized throttling
     document.addEventListener("mousemove", (e) => {
       if (!isDragging || selectedImage === false) return;
 
@@ -1176,21 +1502,36 @@ function setupMugPreviewInteraction() {
       const deltaX = e.clientX - dragStartX;
       const deltaY = e.clientY - dragStartY;
 
-      // Convert pixel movement to slider values
+      // Convert pixel movement to slider values with model-specific handling
       const sensitivity = 2;
+
+      // Different axis handling for different models
+      let invertX = 1;
+      let invertY = 1;
+
+      if (SELECTED_MODEL === "Shirt") {
+        invertY = -1;
+        invertX = -1; 
+      } else if (SELECTED_MODEL === "Poster") {
+        invertX = -1; // Invert X-axis for Poster to fix left/right direction
+        invertY = -1; // Invert Y-axis for Poster canvas preview
+      }
+
       const newLeft = Math.max(parseFloat(X_slider_image.min), 
                               Math.min(parseFloat(X_slider_image.max), 
-                                      dragStartLeft + (deltaX * sensitivity)));
+                                      dragStartLeft + (deltaX * sensitivity * invertX)));
+
       const newTop = Math.max(parseFloat(Y_slider_image.min), 
                              Math.min(parseFloat(Y_slider_image.max), 
-                                     dragStartTop + (deltaY * sensitivity)));
+                                     dragStartTop + (deltaY * sensitivity * invertY)));
+
 
       // Update sliders immediately for visual feedback
       X_slider_image.value = newLeft;
       Y_slider_image.value = newTop;
 
-      // Use optimized update for smooth dragging
-      optimizedImageUpdate(newLeft, newTop);
+      // Use throttled update for 3D scene and snapshots
+      throttledImageUpdate(newLeft, newTop);
     });
 
     // Mouse up event - final update
@@ -1199,16 +1540,17 @@ function setupMugPreviewInteraction() {
         isDragging = false;
         mugPreview.style.cursor = "grab";
 
-        // Ensure final position is applied immediately
+        // Ensure final position is applied
         const finalLeft = parseFloat(X_slider_image.value);
         const finalTop = parseFloat(Y_slider_image.value);
 
         if (selectedImage !== false && Images[selectedImage]) {
           Images[selectedImage].left = finalLeft;
           Images[selectedImage].top = finalTop;
-          
-          // Use immediate update for final position
-          optimizedImageUpdate(finalLeft, finalTop, true);
+          updateImage({ left: finalLeft, top: finalTop });
+
+          // Request final snapshot after a brief delay
+          setTimeout(requestCanvasSnapshot, 100);
         }
       }
     });
@@ -1290,8 +1632,199 @@ function setupMugPreviewInteraction() {
   }
 }
 
+// Initialize interactive canvas
+function initializeInteractiveCanvas() {
+  interactiveCanvas = document.getElementById("interactive-canvas");
+  if (!interactiveCanvas) return;
+
+  interactiveCtx = interactiveCanvas.getContext("2d");
+
+  // Match the 2D preview dimensions
+  const mugPreview = document.getElementById("mug-2d-preview");
+  if (mugPreview) {
+    // Get the computed style of the mug preview to match dimensions
+    const mugRect = mugPreview.getBoundingClientRect();
+    if (mugRect.width > 0 && mugRect.height > 0) {
+      interactiveCanvas.width = mugRect.width;
+      interactiveCanvas.height = mugRect.height;
+    }
+  }
+
+  // Mouse events for interactive canvas
+  interactiveCanvas.addEventListener("mousedown", handleCanvasMouseDown);
+  interactiveCanvas.addEventListener("wheel", handleCanvasWheel);
+  document.addEventListener("mousemove", handleCanvasMouseMove);
+  document.addEventListener("mouseup", handleCanvasMouseUp);
+
+  // Initial draw
+  drawInteractiveCanvas();
+}
+
+function handleCanvasMouseDown(e) {
+  if (!canvasImage || selectedImage === false) return;
+
+  e.preventDefault();
+  isCanvasDragging = true;
+
+  const rect = interactiveCanvas.getBoundingClientRect();
+  canvasDragStartX = e.clientX - rect.left;
+  canvasDragStartY = e.clientY - rect.top;
+  canvasDragStartImageX = canvasImageX;
+  canvasDragStartImageY = canvasImageY;
+
+  interactiveCanvas.style.cursor = "grabbing";
+}
+
+function handleCanvasMouseMove(e) {
+  if (!isCanvasDragging || !canvasImage || selectedImage === false) return;
+
+  e.preventDefault();
+
+  const rect = interactiveCanvas.getBoundingClientRect();
+  const currentX = e.clientX - rect.left;
+  const currentY = e.clientY - rect.top;
+
+  const deltaX = currentX - canvasDragStartX;
+  const deltaY = currentY - canvasDragStartY;
+
+  canvasImageX = canvasDragStartImageX + deltaX;
+  canvasImageY = canvasDragStartImageY + deltaY;
+
+  // Convert canvas position to slider values
+  const canvasToSliderX = (canvasImageX / interactiveCanvas.width) * (parseFloat(X_slider_image.max) - parseFloat(X_slider_image.min)) + parseFloat(X_slider_image.min);
+  const canvasToSliderY = (canvasImageY / interactiveCanvas.height) * (parseFloat(Y_slider_image.max) - parseFloat(Y_slider_image.min)) + parseFloat(Y_slider_image.min);
+
+  // Update sliders
+  X_slider_image.value = Math.max(parseFloat(X_slider_image.min), Math.min(parseFloat(X_slider_image.max), canvasToSliderX));
+  Y_slider_image.value = Math.max(parseFloat(Y_slider_image.min), Math.min(parseFloat(Y_slider_image.max), canvasToSliderY));
+
+  // Update image properties and 3D model
+  if (Images[selectedImage]) {
+    Images[selectedImage].left = parseFloat(X_slider_image.value);
+    Images[selectedImage].top = parseFloat(Y_slider_image.value);
+    updateImage({ left: Images[selectedImage].left, top: Images[selectedImage].top });
+  }
+
+  drawInteractiveCanvas();
+}
+
+function handleCanvasMouseUp(e) {
+  if (isCanvasDragging) {
+    isCanvasDragging = false;
+    interactiveCanvas.style.cursor = "grab";
+
+    // Final update
+    setTimeout(requestCanvasSnapshot, 100);
+  }
+}
+
+function handleCanvasWheel(e) {
+  if (!canvasImage || selectedImage === false) return;
+
+  e.preventDefault();
+
+  const scaleFactor = e.deltaY > 0 ? 0.9 : 1.1;
+  const newScale = Math.max(0.1, Math.min(5, canvasImageScale * scaleFactor));
+
+  if (newScale !== canvasImageScale) {
+    canvasImageScale = newScale;
+
+    // Convert scale to slider value
+    const scaleRange = parseFloat(size_slider_image.max) - parseFloat(size_slider_image.min);
+    const normalizedScale = (canvasImageScale - 0.1) / (5 - 0.1); // Normalize 0.1-5 to 0-1
+    const sliderValue = parseFloat(size_slider_image.min) + (normalizedScale * scaleRange);
+
+    size_slider_image.value = Math.max(parseFloat(size_slider_image.min), Math.min(parseFloat(size_slider_image.max), sliderValue));
+
+    if (Images[selectedImage]) {
+      Images[selectedImage].scale = parseFloat(size_slider_image.value);
+      updateImage({ scale: Images[selectedImage].scale });
+    }
+
+    drawInteractiveCanvas();
+    setTimeout(requestCanvasSnapshot, 50);
+  }
+}
+
+function drawInteractiveCanvas() {
+  if (!interactiveCtx) return;
+
+  // Clear canvas
+  interactiveCtx.clearRect(0, 0, interactiveCanvas.width, interactiveCanvas.height);
+
+  // Draw background
+  interactiveCtx.fillStyle = "#f8f9fa";
+  interactiveCtx.fillRect(0, 0, interactiveCanvas.width, interactiveCanvas.height);
+
+  // Hide/show instructions
+  const instructions = document.getElementById("canvas-instructions");
+  if (canvasImage && instructions) {
+    instructions.style.display = "none";
+  } else if (instructions) {
+    instructions.style.display = "block";
+  }
+
+  // Draw image if available
+  if (canvasImage) {
+    // Use the base scale calculated during image load, then apply current scale factor
+    const imgWidth = canvasImage.width * canvasImageScale;
+    const imgHeight = canvasImage.height * canvasImageScale;
+
+    interactiveCtx.save();
+    interactiveCtx.drawImage(canvasImage, canvasImageX, canvasImageY, imgWidth, imgHeight);
+    interactiveCtx.restore();
+
+    // Draw selection outline
+    if (selectedImage !== false) {
+      interactiveCtx.strokeStyle = "#d32f2f";
+      interactiveCtx.lineWidth = 2;
+      interactiveCtx.setLineDash([5, 5]);
+      interactiveCtx.strokeRect(canvasImageX, canvasImageY, imgWidth, imgHeight);
+      interactiveCtx.setLineDash([]);
+    }
+  }
+}
+
+function updateInteractiveCanvas() {
+  if (!canvasImage || selectedImage === false) return;
+
+  // Update canvas position based on sliders (proportional to canvas size)
+  // Calculate position relative to center to maintain proper centering
+  const sliderRangeX = parseFloat(X_slider_image.max) - parseFloat(X_slider_image.min);
+  const sliderRangeY = parseFloat(Y_slider_image.max) - parseFloat(Y_slider_image.min);
+
+  const normalizedX = (parseFloat(X_slider_image.value) - parseFloat(X_slider_image.min)) / sliderRangeX;
+  const normalizedY = (parseFloat(Y_slider_image.value) - parseFloat(Y_slider_image.min)) / sliderRangeY;
+
+  // Map to canvas coordinates while maintaining centering
+  const scaledWidth = canvasImage.width * canvasImageScale;
+  const scaledHeight = canvasImage.height * canvasImageScale;
+
+  canvasImageX = normalizedX * (interactiveCanvas.width - scaledWidth);
+  canvasImageY = normalizedY * (interactiveCanvas.height - scaledHeight);
+
+  // Update scale proportionally to match 3D model scaling
+  const scaleRange = parseFloat(size_slider_image.max) - parseFloat(size_slider_image.min);
+  const normalizedSliderScale = (parseFloat(size_slider_image.value) - parseFloat(size_slider_image.min)) / scaleRange;
+
+  // Base scale ensures image fits completely without cropping
+  const baseScaleX = interactiveCanvas.width / canvasImage.width;
+  const baseScaleY = interactiveCanvas.height / canvasImage.height;
+  const baseScale = Math.min(baseScaleX, baseScaleY) * 0.8; // 0.8 for padding
+
+  // Apply slider scaling with proper range
+  const minScale = baseScale * 0.1;
+  const maxScale = baseScale * 3.0;
+  canvasImageScale = minScale + (normalizedSliderScale * (maxScale - minScale));
+
+  drawInteractiveCanvas();
+}
+
 // Call setup function when DOM is ready and also when canvas loads
-document.addEventListener("DOMContentLoaded", setupMugPreviewInteraction);
+document.addEventListener("DOMContentLoaded", () => {
+  setupMugPreviewInteraction();
+  initializeInteractiveCanvas();
+});
 
 // Also setup when the canvas loads (in case the preview image loads later)
 Canvas.addEventListener("load", () => {
@@ -1332,6 +1865,7 @@ window.addEventListener("message", (event) => {
       size_slider_image.value = payload.scale;
       rot_slider_image.value = payload.angle * 2;
       Images[selectedImage] = { ...Images[selectedImage], ...payload };
+      updateInteractiveCanvas();
       break;
     case "canvas-snapshot":
       // payload.url is a data URL (base64 PNG) of the Fabric canvas
