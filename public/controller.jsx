@@ -228,9 +228,9 @@ const model2DConfigs = {
   Shirt: {
     preview: "Damn - Digital Hub_files/Layout_Shirt.png",
     previewStyle: {
-      maxWidth: "35%",
+      maxWidth: "25%",
       top:"60px",
-      left:"80px",
+      left:"90px",
       margin: "0 auto",
       cursor: "grab",
       border: "1px dashed #aaa",
@@ -1341,8 +1341,38 @@ function setupMugPreviewInteraction() {
   if (mugPreview) {
     // Mouse down event
     mugPreview.addEventListener("mousedown", (e) => {
+      // If no image is selected but we have images, select the first one
+      if (selectedImage === false && Images.length > 0) {
+        selectedImage = 0;
+        const firstImageId = Images[0]._id;
+
+        // Update UI to show this layer as selected
+        document.querySelector(".selected_layer")?.classList.remove("selected_layer");
+        document.querySelector(`[data-id='${firstImageId}']`)?.classList.add("selected_layer");
+
+        // Update slider values to match the selected image properties
+        X_slider_image.value = Images[0].left || 0;
+        Y_slider_image.value = Images[0].top || 0;
+        size_slider_image.value = Images[0].scale || 400;
+        rot_slider_image.value = (Images[0].angle || 0) * 2;
+
+        // Switch to Image customization tab if not already active
+        if (SelectedCustomization !== "Image") {
+          document.querySelector("#text-customization").style.display = "none";
+          document.querySelector("#image-customization").style.display = "block";
+          document.querySelector(".customization-buttons>button.active").classList.remove("active");
+          document.querySelector(".customization-buttons button:first-child").classList.add("active");
+          SelectedCustomization = "Image";
+        }
+
+        // Tell the 3D iframe to select this layer
+        postToIframe({ type: "select-layer", payload: { _id: firstImageId } });
+
+        console.log("Auto-selected first image layer on 2D preview click");
+      }
+
       if (selectedImage === false) {
-        return; // No image selected
+        return; // No image selected and no images available
       }
 
       e.preventDefault();
