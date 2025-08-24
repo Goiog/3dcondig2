@@ -316,18 +316,18 @@ document.querySelector(".product-buttons").addEventListener("click", (e) => {
     IniModel = false;
     SELECTED_MODEL = newModel;
 
-    // ❌ Clear layers so Mug layers don’t leak
-    Texts.length = 0;
-    Images.length = 0;
-    document.querySelector(".text_layers").innerHTML = "";
-    document.querySelector(".image_layers").innerHTML = "";
-
-    // ✅ Tell iframe to clear layers
+    // ✅ Tell iframe to clear layers first
     postToIframe({ type: "clear-layers" });
 
+    // Clear text layers only - preserve images
+    Texts.length = 0;
+    document.querySelector(".text_layers").innerHTML = "";
+
+    // Clear UI selections
     selectedText = false;
     selectedImage = false;
     document.querySelector(".selected_layer")?.classList.remove("selected_layer");
+
 
     // Set slider ranges depending on product ...
       if (SELECTED_MODEL === "Mug") {
@@ -396,7 +396,7 @@ else if (SELECTED_MODEL === "Shirt") {
     // Reload the iframe
     Canvas.src = `https://3d-config-seven.vercel.app/?model=${SELECTED_MODEL}`;
     document.querySelector(".loading-indicator").style.display = "block";
-  
+
     // ✅ Update 2D preview according to selected model
 const config = model2DConfigs[newModel];
     const previewImg = document.getElementById("mug-2d-preview");
@@ -462,7 +462,7 @@ document
     }
   });
 
-// add text layer to dom
+// add text Layer to dom
 const CreateTextLayer = (text, id) => {
   // Create the main container
   const textLayer = document.createElement("div");
