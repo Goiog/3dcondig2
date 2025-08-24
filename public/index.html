@@ -621,7 +621,7 @@
                     </div>
                   </div>
                   <div style="margin-top: 12px; position: relative; display: inline-block;padding-bottom: 40px;">
-                    <label style="display:block; font-weight:600; margin-bottom:6px;">2D Mug preview</label>
+                    <label style="display:block; font-weight:600; margin-bottom:6px;">2D Preview</label>
 
                     <!-- Canvas / Image -->
                     <img id="mug-2d-preview" alt="2D Mug Design" 
@@ -632,8 +632,12 @@
                          style="position: absolute; bottom: -3px; left: 50%; transform: translateX(-50%); z-index: 2; pointer-events: none; max-width: 100%;" />
                   </div>
 
-                  <div class="control-group">
+                  <!--<div class="control-group">
                     <label class="control-label">Image Size</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 12px; color: #666;">Value:</span>
+                      <span id="size-value-display" style="font-size: 12px; font-weight: 600; color: #333;">920</span>
+                    </div>
                     <input
                       type="range"
                       class="control-slider"
@@ -682,6 +686,12 @@
 
                   <div class="control-group">
                     <label class="control-label">Image Position</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 12px; color: #666;">X:</span>
+                      <span id="x-position-value-display" style="font-size: 12px; font-weight: 600; color: #333;">0</span>
+                      <span style="font-size: 12px; color: #666;">Y:</span>
+                      <span id="y-position-value-display" style="font-size: 12px; font-weight: 600; color: #333;">0</span>
+                    </div>
                     <div
                       style="
                         display: grid;
@@ -744,7 +754,7 @@
                       <span>360°</span>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div
                   id="text-customization"
                   style="display: none"
@@ -1792,7 +1802,7 @@
             // Automatically hide meshes defined in the product config
             const productConfigs = {
               poster: {
-                hiddenMeshes: ["plane006", "Cube004", "Plane006"],
+                hiddenMeshes: [],
               },
               tshirt: {
                 hiddenMeshes: [],
@@ -2172,6 +2182,47 @@
           canvas.contentWindow.postMessage(message, "*");
         }
       }, 100);
+
+      // Function to update numeric value displays
+      function updateValueDisplays() {
+        const sizeSlider = document.querySelector("#image-customization #size-slider");
+        const xPositionSlider = document.querySelector("#image-customization #x-position");
+        const yPositionSlider = document.querySelector("#image-customization #y-position");
+        
+        const sizeDisplay = document.getElementById("size-value-display");
+        const xPositionDisplay = document.getElementById("x-position-value-display");
+        const yPositionDisplay = document.getElementById("y-position-value-display");
+        
+        if (sizeSlider && sizeDisplay) {
+          sizeDisplay.textContent = sizeSlider.value;
+        }
+        if (xPositionSlider && xPositionDisplay) {
+          xPositionDisplay.textContent = parseFloat(xPositionSlider.value).toFixed(1);
+        }
+        if (yPositionSlider && yPositionDisplay) {
+          yPositionDisplay.textContent = parseFloat(yPositionSlider.value).toFixed(1);
+        }
+      }
+
+      // Add event listeners to update displays when sliders change
+      document.addEventListener("DOMContentLoaded", () => {
+        const sizeSlider = document.querySelector("#image-customization #size-slider");
+        const xPositionSlider = document.querySelector("#image-customization #x-position");
+        const yPositionSlider = document.querySelector("#image-customization #y-position");
+        
+        if (sizeSlider) {
+          sizeSlider.addEventListener("input", updateValueDisplays);
+        }
+        if (xPositionSlider) {
+          xPositionSlider.addEventListener("input", updateValueDisplays);
+        }
+        if (yPositionSlider) {
+          yPositionSlider.addEventListener("input", updateValueDisplays);
+        }
+        
+        // Initial update
+        updateValueDisplays();
+      });
       // Product selection
       document.querySelectorAll(".product-item").forEach((item) => {
         item.addEventListener("click", () => {
