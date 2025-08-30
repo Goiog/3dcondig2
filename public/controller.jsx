@@ -185,38 +185,8 @@ const rot_slider_image = document.querySelector(
   "#image-customization #rotation-slider"
 );
 
-const loadingIndicator = document.querySelector(".loading-indicator");
-const progressText = document.getElementById("loading-progress");
-let progress = 0;
-let progressInterval;
-
-function startLoadingProgress() {
-  progress = 0;
-  progressText.textContent = "0%";
-  clearInterval(progressInterval);
-  progressInterval = setInterval(() => {
-    if (progress < 95) { // stop at 95%, final 100% comes on iframe load
-      progress += 5;
-      progressText.textContent = progress + "%";
-    }
-  }, 200);
-}
-
-function stopLoadingProgress() {
-  clearInterval(progressInterval);
-  progress = 100;
-  progressText.textContent = "100%";
-  setTimeout(() => {
-    loadingIndicator.style.display = "none";
-  }, 300);
-}
-
-// enable loading anim
-loadingIndicator.style.display = "block";
-startLoadingProgress();
-
-Canvas.addEventListener("load", () => {
-  stopLoadingProgress();
+Canvas.addEventListener("load", (e) => {
+  document.querySelector(".loading-indicator").style.display = "none";
   if (!IniModel) {
     setTimeout(() => {
       postToIframe({
@@ -226,23 +196,6 @@ Canvas.addEventListener("load", () => {
     }, 1000);
   }
 });
-
-const previewLoading = document.getElementById("preview-loading");
-const previewImg = document.getElementById("mug-2d-preview");
-const overlayImg = document.querySelector('img[alt="Mug layout"]');
-
-function showPreviewLoading() {
-  previewLoading.style.display = "flex";
-}
-
-function hidePreviewLoading() {
-  previewLoading.style.display = "none";
-}
-
-// Attach load listeners
-previewImg.onload = hidePreviewLoading;
-overlayImg.onload = hidePreviewLoading;
-
 
 // Map each model to its 2D preview image
 // Map each model to its preview image and styles
@@ -421,23 +374,19 @@ else if (SELECTED_MODEL === "Shirt") {
     document.querySelector(".loading-indicator").style.display = "block";
 
     // ✅ Update 2D preview according to selected model
-const config = model2DConfigs[newModel];
+    const config = model2DConfigs[newModel];
     const previewImg = document.getElementById("mug-2d-preview");
     const overlayImg = document.querySelector('img[alt="Mug layout"]');
 
-    // Show loading before swapping previews
-    showPreviewLoading();
-    
     if (config && previewImg) {
-      Object.assign(previewImg.style, config.previewStyle);
       //previewImg.src = config.preview;
-    }
-    
-    if (config && overlayImg) {
-      Object.assign(overlayImg.style, config.overlayStyle);
-      overlayImg.src = config.preview;
+      Object.assign(previewImg.style, config.previewStyle);
     }
 
+    if (config && overlayImg) {
+      overlayImg.src = config.preview;
+      Object.assign(overlayImg.style, config.overlayStyle);
+    }
 
     // reload iframe (already in your code)
     Canvas.src = `https://3d-config-seven.vercel.app/?model=${SELECTED_MODEL}`;
