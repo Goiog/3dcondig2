@@ -185,8 +185,38 @@ const rot_slider_image = document.querySelector(
   "#image-customization #rotation-slider"
 );
 
-Canvas.addEventListener("load", (e) => {
-  document.querySelector(".loading-indicator").style.display = "none";
+const loadingIndicator = document.querySelector(".loading-indicator");
+const progressText = document.getElementById("loading-progress");
+let progress = 0;
+let progressInterval;
+
+function startLoadingProgress() {
+  progress = 0;
+  progressText.textContent = "0%";
+  clearInterval(progressInterval);
+  progressInterval = setInterval(() => {
+    if (progress < 95) { // stop at 95%, final 100% comes on iframe load
+      progress += 5;
+      progressText.textContent = progress + "%";
+    }
+  }, 200);
+}
+
+function stopLoadingProgress() {
+  clearInterval(progressInterval);
+  progress = 100;
+  progressText.textContent = "100%";
+  setTimeout(() => {
+    loadingIndicator.style.display = "none";
+  }, 300);
+}
+
+// enable loading anim
+loadingIndicator.style.display = "block";
+startLoadingProgress();
+
+Canvas.addEventListener("load", () => {
+  stopLoadingProgress();
   if (!IniModel) {
     setTimeout(() => {
       postToIframe({
@@ -196,6 +226,7 @@ Canvas.addEventListener("load", (e) => {
     }, 1000);
   }
 });
+
 
 // Map each model to its 2D preview image
 // Map each model to its preview image and styles
