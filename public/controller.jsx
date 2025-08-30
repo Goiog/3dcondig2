@@ -430,7 +430,7 @@ const config = model2DConfigs[newModel];
     
     if (config && previewImg) {
       Object.assign(previewImg.style, config.previewStyle);
-      previewImg.src = config.preview;
+      //previewImg.src = config.preview;
     }
     
     if (config && overlayImg) {
