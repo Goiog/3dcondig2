@@ -250,102 +250,78 @@ const model2DConfigs = {
   Mug: {
     preview: "Damn - Digital Hub_files/Layout_Mug.png",
     previewStyle: {
-      maxWidth: "83%",
-      top:"0px",
-      left:"20px",
-      margin: "0 auto",
+      position: "absolute",
+      maxWidth: "82%",
+      top:"23%",
+      left:"9%",
       cursor: "grab",
       border: "1px dashed #aaa",
-      borderRadius: "8px",
-      position: "relative",
-      marginBottom: "10px",
+      borderRadius: "0px",
       zIndex: "1"
     },
     overlayStyle: {
-      position: "absolute",
-      top: "5px",
-      bottom: "-3px",
+      position: "relative",
       maxWidth: "100%",
-      left: "50%",
       pointerEvents: "none",
-      transform: "translateX(-50%)",
       zIndex: "2"
     }
   },
   Shirt: {
     preview: "Damn - Digital Hub_files/Layout_Shirt.png",
     previewStyle: {
+      position: "absolute",
       maxWidth: "25%",
-      top:"60px",
-      left:"90px",
-      margin: "0 auto",
+      top:"35%",
+      left:"38%",
       cursor: "grab",
       border: "1px dashed #aaa",
       borderRadius: "8px",
-      position: "relative",
-      marginBottom: "45px",
       zIndex: "1"
     },
     overlayStyle: {
-      position: "absolute",
-      bottom: "0px",
-      top: "20px",
+      position: "relative",
       maxWidth: "100%",
-      left: "50%",
       pointerEvents: "none",
-      transform: "translateX(-50%)",
       zIndex: "2"
     }
   },
   Cap: {
     preview: "Damn - Digital Hub_files/Layout_Cap.png",
     previewStyle: {
+      position: "absolute",
       maxWidth: "60%",
-      top:"45px",
-      left:"52px",
-      margin: "0 auto",
+      top:"26%",
+      left:"22%",
       cursor: "grab",
       border: "1px dashed #aaa",
       borderRadius: "8px",
-      position: "relative",
-      marginBottom: "70px",
       zIndex: "1"
     },
     overlayStyle: {
-      position: "absolute",
-      bottom: "0px",
-      top: "20px",
+      position: "relative",
       maxWidth: "100%",
-      left: "50%",
       pointerEvents: "none",
-      transform: "translateX(-50%)",
       zIndex: "2"
     }
   },
   Poster: {
     preview: "Damn - Digital Hub_files/Layout_Poster.png",
     previewStyle: {
-        maxWidth: "56%",
-        top:"10px",
-        left:"52px",
-        margin: "0 auto",
-        cursor: "grab",
-        border: "1px dashed #aaa",
-        borderRadius: "2px",
-        position: "relative",
-        marginBottom: "0px",
-        zIndex: "1"
-      },
-      overlayStyle: {
-        position: "absolute",
-        bottom: "0px",
-        top: "20px",
-        maxWidth: "70%",
-        left: "50%",
-        pointerEvents: "none",
-        transform: "translateX(-50%)",
-        zIndex: "2"
-      }
+      position: "absolute",
+      maxWidth: "82%",
+      top:"14%",
+      left:"9%",
+      cursor: "grab",
+      border: "1px dashed #aaa",
+      borderRadius: "0px",
+      zIndex: "1"
+    },
+    overlayStyle: {
+      position: "relative",
+      maxWidth: "100%",
+      pointerEvents: "none",
+      zIndex: "2"
+    }
     }
 };
 
