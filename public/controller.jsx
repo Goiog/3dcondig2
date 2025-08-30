@@ -227,6 +227,22 @@ Canvas.addEventListener("load", () => {
   }
 });
 
+const previewLoading = document.getElementById("preview-loading");
+const previewImg = document.getElementById("mug-2d-preview");
+const overlayImg = document.querySelector('img[alt="Mug layout"]');
+
+function showPreviewLoading() {
+  previewLoading.style.display = "flex";
+}
+
+function hidePreviewLoading() {
+  previewLoading.style.display = "none";
+}
+
+// Attach load listeners
+previewImg.onload = hidePreviewLoading;
+overlayImg.onload = hidePreviewLoading;
+
 
 // Map each model to its 2D preview image
 // Map each model to its preview image and styles
@@ -433,15 +449,19 @@ const config = model2DConfigs[newModel];
     const previewImg = document.getElementById("mug-2d-preview");
     const overlayImg = document.querySelector('img[alt="Mug layout"]');
 
+    // Show loading before swapping previews
+    showPreviewLoading();
+    
     if (config && previewImg) {
-      previewImg.src = config.preview;
       Object.assign(previewImg.style, config.previewStyle);
+      previewImg.src = config.preview;
+    }
+    
+    if (config && overlayImg) {
+      Object.assign(overlayImg.style, config.overlayStyle);
+      overlayImg.src = config.preview;
     }
 
-    if (config && overlayImg) {
-      overlayImg.src = config.preview;
-      Object.assign(overlayImg.style, config.overlayStyle);
-    }
 
     // reload iframe (already in your code)
     Canvas.src = `https://3d-config-seven.vercel.app/?model=${SELECTED_MODEL}`;
